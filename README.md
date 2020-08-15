@@ -14,6 +14,13 @@
 
 ---
 
+## Getting Started
+This package is meant to work alongisde any React application. Simply add the package to your list of dependencies, and make awesome projects 😎.
+
+```bash
+yarn add @mitchbne/react-listbox
+```
+
 ## Example Usage
 ```jsx
 import React, { useState } from "react"
