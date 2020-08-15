@@ -28,6 +28,7 @@
       "pre-commit": "tsdx lint src test example"
     }
   },
+  "prettier": {},
   "devDependencies": {
     "@types/react": "^16.9.46",
     "@types/react-dom": "^16.9.8",
