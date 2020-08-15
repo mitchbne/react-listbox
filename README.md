@@ -1,6 +1,6 @@
-<h3 align="center">
+<h2 align="center">
   React Listbox
-</h3>
+</h2>
 
 <p align="center">
   A React implementation to the Vue Listbox component designed by TailwindLabs
@@ -14,14 +14,20 @@
 
 ---
 
-## Getting Started
+### Getting Started
 This package is meant to work alongisde any React application. Simply add the package to your list of dependencies, and make awesome projects 😎.
 
 ```bash
 yarn add @mitchbne/react-listbox
 ```
 
-## Example Usage
+### To Do
+- [x] Create a JSX replication of TailwindLab's Vue Listbox solution
+- [x] Add Typescript support for components
+- [x] Turn the components into an installable library
+- [ ] Add support for the ListboxList component to be a React Portal.
+
+### Example Usage
 ```jsx
 import React, { useState } from "react"
 import { Listbox, ListboxLabel, ListboxButton, ListboxList, ListboxOption } from "@mitchbne/react-listbox"
