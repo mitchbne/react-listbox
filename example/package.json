@@ -3,10 +3,7 @@
   "version": "1.0.0",
   "main": "index.tsx",
   "license": "MIT",
-  "source": [
-    "../src/index.tsx",
-    "./index.tsx"
-  ],
+  "source":  "./index.tsx",
   "scripts": {
     "start": "NODE_ENV=development yarn run tailwindcss && parcel index.html",
     "build": "NODE_ENV=production yarn run tailwindcss:prod && parcel build index.html",
