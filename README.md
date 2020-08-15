@@ -1,10 +1,18 @@
-# TSDX React User Guide
+<h3 align="center">
+  React Listbox
+</h3>
 
-Congrats! You just saved yourself hours of work by bootstrapping this project with TSDX. Let’s get you oriented with what’s here and how to use it.
+<p align="center">
+  A React implementation to the Vue Listbox component designed by TailwindLabs
+</p>
 
-> This TSDX setup is meant for developing React components (not apps!) that can be published to NPM. If you’re looking to build an app, you should use `create-react-app`, `razzle`, `nextjs`, `gatsby`, or `react-static`.
+<p align="center">
+  <a href="https://www.npmjs.com/package/@mitchbne/react-listbox"><img src="https://img.shields.io/npm/v/@mitchbne/react-listbox?style=flat-square"></a>
+  <a href="https://www.npmjs.com/package/@mitchbne/react-listbox"><img src="https://img.shields.io/npm/dm/@mitchbne/react-listbox?style=flat-square"></a>
+  <a href="https://github.com/mitchbne/react-listbox/actions"><img src="https://img.shields.io/github/workflow/status/mitchbne/react-listbox/Node%20CI/master?style=flat-square"></a>
+</p>
 
-> If you’re new to TypeScript and React, checkout [this handy cheatsheet](https://github.com/sw-yx/react-typescript-cheatsheet/)
+---
 
 ## Commands
 
