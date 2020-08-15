@@ -1,13 +1,17 @@
 {
   "name": "example",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.tsx",
   "license": "MIT",
+  "source": [
+    "../src/index.tsx",
+    "./index.tsx"
+  ],
   "scripts": {
-    "start": "yarn run tailwindcss && parcel index.html",
-    "build": "yarn run tailwindcss:prod && parcel build index.html",
-    "tailwindcss": "NODE_ENV=development tailwindcss build -o ./tailwind.css",
-    "tailwindcss:prod": "NODE_ENV=production tailwindcss build -o ./tailwind.css"
+    "start": "NODE_ENV=development yarn run tailwindcss && parcel index.html",
+    "build": "NODE_ENV=production yarn run tailwindcss:prod && parcel build index.html",
+    "tailwindcss": "tailwindcss build -o ./tailwind.css",
+    "tailwindcss:prod": "tailwindcss build -o ./tailwind.css"
   },
   "dependencies": {
     "react": "^16.13.1",
