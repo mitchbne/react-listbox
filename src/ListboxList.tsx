@@ -1,29 +1,42 @@
 import React, { Component } from "react"
 import { ListboxContext } from "./Listbox"
+import { ListboxOption } from "."
 
-function isString(value) {
+type Props = {
+  children: ListboxOption[],
+  className?: string
+}
+
+type State = {
+  focusedIndex: number | null,
+  values: string[] | null
+}
+
+function isString(value: any): value is string { // eslint-disable-line @typescript-eslint/no-explicit-any
   return typeof value === "string" || value instanceof String
 }
 
-export class ListboxList extends Component {
-  constructor(props){
+export class ListboxList extends Component<Props, State> {
+  constructor(props: Props){
     super(props)
     this.state = { focusedIndex: null, values: null }
   }
-
-  componentDidMount(){
+  
+  componentDidMount(): void{
     this.context.setListboxListRef(this.ownRef)
-    const values = this.props.children.map(node => node.props.value)
-    this.setState({ values }, () => { this.context.setValues(values) })
+    const values: string[] = this.props.children.map(node => node.props.value)
+    this.setState({ values }, (): void => { this.context.setValues(values) })
   }
+  ownRef: HTMLElement | null = null
 
-  handleBlur = (e) => {
+  handleBlur = (e: React.FocusEvent): void => {
     if (e.relatedTarget === this.context.listboxButtonRef){ return } // The button will already handle the toggle for us
     this.context.close()
   }
 
-  handleKeydown = (e) => {
-    const focusedIndex = this.state.values.indexOf(this.context.activeItem )
+  handleKeydown = (e: React.KeyboardEvent): void => {
+    const focusedIndex = this.state.values?.indexOf(this.context.activeItem )
+    if (!focusedIndex || !this.state.values){ return }
 
     let indexToFocus
     switch (e.key) {
@@ -38,13 +51,13 @@ export class ListboxList extends Component {
     case "Up":
     case "ArrowUp":
       e.preventDefault()
-      indexToFocus = focusedIndex - 1 < 0 ? this.state.values.length - 1 : focusedIndex - 1
+      indexToFocus = focusedIndex - 1 < 0 ? this.state.values?.length - 1 : focusedIndex - 1
       this.context.focus(this.state.values[indexToFocus])
       break
     case "Down":
     case "ArrowDown":
       e.preventDefault()
-      indexToFocus = focusedIndex + 1 > this.state.values.length - 1 ? 0 : focusedIndex + 1
+      indexToFocus = focusedIndex + 1 > this.state.values?.length - 1 ? 0 : focusedIndex + 1
       this.context.focus(this.state.values[indexToFocus])
       break
     case "Spacebar":
@@ -71,14 +84,14 @@ export class ListboxList extends Component {
     }
   }
 
-  handleMouseLeave = () => {
+  handleMouseLeave = (): void => {
     this.context.setActiveItem(null)
   }
 
-  render(){
+  render(): React.ReactNode{
     const { children, className } = this.props
     return (
-      <ul // eslint-disable-line jsx-a11y/aria-activedescendant-has-tabindex
+      <ul
         aria-activedescendant={this.context.getActiveDescendant()}
         aria-labelledby={this.context.props.labelledby}
         className={className}

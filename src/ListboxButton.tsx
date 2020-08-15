@@ -2,8 +2,18 @@ import React, { Component } from "react"
 import { ListboxContext } from "./Listbox"
 import { generateId } from "./utils"
 
-export class ListboxButton extends Component {
-  constructor(props){
+type Props = {
+  children: (({ isFocused }: { isFocused: boolean }) => React.ReactNode | string ) | string | React.ReactNode | null,
+  className?: string,
+}
+
+type State = {
+  isFocused: boolean,
+  id: string
+}
+
+export class ListboxButton extends Component<Props, State> {
+  constructor(props: Props){
     super(props)
     this.state = {
       id: generateId(),
@@ -11,15 +21,17 @@ export class ListboxButton extends Component {
     }
   }
   
-  componentDidMount(){
+  
+  componentDidMount(): void{
     this.context.setButtonId(this.state.id)
     this.context.setListboxButtonRef(this.ownRef)
   }
+  ownRef: HTMLElement | null = null
   
-  focus = () => this.setState({ isFocused: true })
-  blur = () => this.setState({ isFocused: false })
+  focus = (): void => this.setState({ isFocused: true })
+  blur = (): void => this.setState({ isFocused: false })
 
-  render(){
+  render(): React.ReactNode {
     const { children, className } = this.props
     const { isFocused } = this.state
     return (
@@ -35,7 +47,7 @@ export class ListboxButton extends Component {
         type="button"
         {...(this.context.isOpen ? { "aria-expanded": "true" } : {})}
       > 
-        { typeof children === "function" ? children({ isFocused }) : children }
+        { children instanceof Function ? children({ isFocused }) : children }
       </button>
     )
   }

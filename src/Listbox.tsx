@@ -2,8 +2,28 @@ import React, { Component } from "react"
 
 export const ListboxContext = React.createContext({})
 
-export class Listbox extends Component {
-  constructor(props){
+type Props = {
+  children: React.ReactNode,
+  className?: string,
+  value: string,
+  onChange: (value: string) => void
+}
+
+type State = {
+  typeahead: string,
+  listboxButtonRef: HTMLElement | null,
+  listboxListRef: HTMLElement | null,
+  isOpen: boolean,
+  activeItem: string,
+  values: string[],
+  labelId: string | null,
+  buttonId: string | null,
+  optionIds: Array<[string, string]>,
+  optionRefs: Array<[string, HTMLElement]>,
+}
+
+export class Listbox extends Component<Props, State> {
+  constructor(props: Props){
     super(props)
     this.state = {
       typeahead: "",
@@ -11,7 +31,7 @@ export class Listbox extends Component {
       listboxListRef: null,
       isOpen: false,
       activeItem: this.props.value,
-      values: null,
+      values: [],
       labelId: null,
       buttonId: null,
       optionIds: [],
@@ -19,23 +39,28 @@ export class Listbox extends Component {
     }
   }
 
-  getActiveDescendant = () => {
+  getActiveDescendant = (): string | null => {
     const [, id] = this.state.optionIds.find(([value]) => value === this.state.activeItem) || [null, null]
     return id
   }
 
-  registerOptionId = (value, optionId) => {
+  registerOptionId = (value: string, optionId: string): void => {
     this.unregisterOptionId(value)
     this.setState(prevState => ({ optionIds: [...prevState.optionIds, [value, optionId]] } ))
   }
 
-  unregisterOptionId = (value) => {
+  unregisterOptionId = (value: string): void => {
     this.setState(prevState => ({ optionIds: prevState.optionIds.filter(([candidateValue]) => candidateValue !== value) }) )
   }
 
-  type = (value) => {
+  type = (value: string): void => {
     this.setState(prevState => ({ typeahead: prevState.typeahead.concat(value) }), () => {
-      const [match] = this.state.optionRefs.find(([, ref]) => ref.innerText.toLowerCase().startsWith(this.state.typeahead.toLowerCase())) || [null]
+      const [match] = this.state.optionRefs.find(
+        ([, ref]) => {
+          const el: HTMLElement = ref
+          return el.innerText.toLowerCase().startsWith(this.state.typeahead.toLowerCase())
+        }
+      ) || [null]
   
       if (match !== null) { this.focus(match) }
   
@@ -43,60 +68,60 @@ export class Listbox extends Component {
     })
   }
 
-  clearTypeahead = () => { 
+  clearTypeahead = (): void => { 
     setTimeout(() => {this.setState({ typeahead: "" }) }, 500)
   }
 
-  registerOptionRef = (value, optionRef) => {
+  registerOptionRef = (value: string, optionRef: HTMLElement): void => {
     this.unregisterOptionRef(value)
     this.setState(prevState => ({ optionRefs: [...prevState.optionRefs, [value, optionRef]] }))
   }
 
-  unregisterOptionRef = (value) => {
+  unregisterOptionRef = (value: string): void => {
     this.setState(prevState => ({ optionRefs:  prevState.optionRefs.filter(([candidateValue]) => candidateValue !== value) }))
   }
 
-  toggle = () => { this.state.isOpen ? this.close() : this.open() }
+  toggle = (): void => { this.state.isOpen ? this.close() : this.open() }
 
-  open = () => {
+  open = (): void => {
     this.setState({ isOpen: true }, () => {
       process.nextTick(() => {
         if (this.state.listboxListRef){
           this.focus(this.props.value)
           process.nextTick(() => {
-            this.state.listboxListRef.focus()
+            this.state.listboxListRef?.focus()
           })
         }
       })
     })
   }
   
-  close = () => {
-    this.setState({ isOpen: false }, () => { this.state.listboxButtonRef.focus() })
+  close = (): void => {
+    this.setState({ isOpen: false }, () => { this.state.listboxButtonRef?.focus() })
   }
   
-  select = (value) => {
+  select = (value: string): void => {
     this.props.onChange(value)
     process.nextTick(() => {
       this.close()
     })
   }
   
-  focus = (value) => {
+  focus = (value: string): void => {
     this.setState({ activeItem: value }, () => {
       if (value === null){ return }
-      this.state.listboxListRef.children[this.state.values.indexOf(this.state.activeItem)].scrollIntoView({ block: "nearest" })
+      this.state.listboxListRef?.children[this.state.values.indexOf(this.state.activeItem)].scrollIntoView({ block: "nearest" })
     })
   }
 
-  setListboxButtonRef = (ref) => { this.setState({ listboxButtonRef: ref })}
-  setListboxListRef = (ref) => { this.setState({ listboxListRef: ref })}
-  setButtonId = (id) => { this.setState({ buttonId: id })}
-  setLabelId = (id) => { this.setState({ labelId: id })}
-  setValues = (values) => { this.setState({ values })}
-  setActiveItem = (activeItem) => { this.setState({ activeItem })}
+  setListboxButtonRef = (ref: HTMLElement): void => { this.setState({ listboxButtonRef: ref })}
+  setListboxListRef = (ref: HTMLElement): void => { this.setState({ listboxListRef: ref })}
+  setButtonId = (id: string): void => { this.setState({ buttonId: id })}
+  setLabelId = (id: string): void => { this.setState({ labelId: id })}
+  setValues = (values: string[]): void => { this.setState({ values })}
+  setActiveItem = (activeItem: string): void => { this.setState({ activeItem })}
 
-  render(){
+  render(): React.ReactNode {
     const { children, className } = this.props
     const { isOpen } = this.state
 
@@ -133,7 +158,7 @@ export class Listbox extends Component {
     return (
       <ListboxContext.Provider value={ProvidedContext}>
         <div className={className}>
-          { typeof children === "function" ? children({ isOpen }) : children }
+          { children instanceof Function ? children({ isOpen }) : children }
         </div>
       </ListboxContext.Provider>
     )

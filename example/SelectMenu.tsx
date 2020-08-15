@@ -1,7 +1,8 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React, { useState } from "react"
 import { Listbox, ListboxLabel, ListboxButton, ListboxList, ListboxOption } from "../."
 
-export const SelectMenu = () => {
+export const SelectMenu = (): React.ReactNode => {
   const [selectedWrestler, setSelectedWrestler] = useState("Ric Flair")
   const wrestlers = [
     "Stone Cold Steven Austin",
@@ -65,3 +66,4 @@ export const SelectMenu = () => {
 }
 
 export default null
+/* eslint-enable import/no-extraneous-dependencies */

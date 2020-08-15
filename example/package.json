@@ -11,8 +11,8 @@
     "react-app-polyfill": "^1.0.0"
   },
   "alias": {
-    "react": ".react",
-    "react-dom": ".react-dom/profiling",
+    "react": "../node_modules/react",
+    "react-dom": "../node_modules/react-dom/profiling",
     "scheduler/tracing": "../node_modules/scheduler/tracing-profiling"
   },
   "devDependencies": {
