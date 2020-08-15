@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { useState } from "react"
 import { Listbox, ListboxLabel, ListboxButton, ListboxList, ListboxOption } from "../."
 
@@ -66,4 +65,3 @@ export const SelectMenu = (): React.ReactNode => {
 }
 
 export default null
-/* eslint-enable import/no-extraneous-dependencies */
