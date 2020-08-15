@@ -1,5 +1,5 @@
 {
-  "name": "react-listbox",
+  "name": "@mitchbne/react-listbox",
   "author": "Mitch Smith",
   "module": "dist/react-listbox.esm.js",
   "version": "0.1.0",
