@@ -1,0 +1,21 @@
+{
+  "name": "@mitchbne/react-listbox",
+  "version": "0.1.0-alpha.1",
+  "author": "Mitch Smith",
+  "license": "MIT",
+  "source": "src/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.module.js",
+  "unpkg": "dist/index.umd.js",
+  "scripts": {
+    "build": "microbundle -i src/index.jsx -o dist"
+  },
+  "devDependencies": {
+    "microbundle": "^0.12.0"
+  },
+  "description": "React implementation of Tailwind's Vue Listbox",
+  "repository": "git@github.com:mitchbne/react-listbox.git",
+  "dependencies": {
+    "react": "^16.13.1"
+  }
+}

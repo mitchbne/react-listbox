@@ -60,12 +60,14 @@ export class Listbox extends Component {
 
   open = () => {
     this.setState({ isOpen: true }, () => {
-      setTimeout(() => {
+      process.nextTick(() => {
         if (this.state.listboxListRef){
           this.focus(this.props.value)
-          setTimeout(() => {this.state.listboxListRef.focus()}, 5)
+          process.nextTick(() => {
+            this.state.listboxListRef.focus()
+          })
         }
-      }, 10)
+      })
     })
   }
   
@@ -75,7 +77,9 @@ export class Listbox extends Component {
   
   select = (value) => {
     this.props.onChange(value)
-    setTimeout(() => {this.close() }, 5)
+    process.nextTick(() => {
+      this.close()
+    })
   }
   
   focus = (value) => {

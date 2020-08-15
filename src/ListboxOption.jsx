@@ -39,8 +39,8 @@ export class ListboxOption extends Component {
         onClick={this.handleClick}
         onMouseMove={this.handleMouseMove}
         ref={el => this.ownRef = el}
-        role="option"
-        {...isSelected ? { "aria-selected": true } : {}}
+        tabIndex={-1}
+        {...isSelected ? { "aria-selected": true, role: "option" } : {}}
       >
         { typeof children === "function" ? children({ isSelected, isActive }) : children }
       </li>

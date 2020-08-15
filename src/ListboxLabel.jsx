@@ -14,9 +14,7 @@ export class ListboxLabel extends Component {
 
   render(){
     const { children, className } = this.props
-    return (
-      <span className={className} id={this.state.id}>{children}</span>
-    )
+    return ( children && <span className={className} id={this.state.id}>{children}</span> )
   }
 } 
 

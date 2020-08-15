@@ -78,7 +78,7 @@ export class ListboxList extends Component {
   render(){
     const { children, className } = this.props
     return (
-      <ul
+      <ul // eslint-disable-line jsx-a11y/aria-activedescendant-has-tabindex
         aria-activedescendant={this.context.getActiveDescendant()}
         aria-labelledby={this.context.props.labelledby}
         className={className}
