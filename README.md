@@ -22,9 +22,9 @@ yarn add @mitchbne/react-listbox
 ```
 
 ### To Do
-- [x] Create a JSX replication of TailwindLab's Vue Listbox solution
-- [x] Add Typescript support for components
-- [x] Turn the components into an installable library
+- [ ] Create a JSX replication of TailwindLab's Vue Listbox solution
+- [ ] Add Typescript support for components
+- [ ] Turn the components into an installable library
 - [ ] Add support for the ListboxList component to be a React Portal.
 
 ### Example Usage
