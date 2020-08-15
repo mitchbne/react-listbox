@@ -47,7 +47,7 @@ export class ListboxOption extends Component<Props, State> {
       <li
         className={className}
         id={this.state.id}
-        onClick={this.handleClick}
+        onMouseDown={this.handleClick}
         onMouseMove={this.handleMouseMove}
         ref={el => this.ownRef = el}
         tabIndex={-1}
