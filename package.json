@@ -1,21 +1,51 @@
 {
-  "name": "@mitchbne/react-listbox",
-  "version": "0.1.0-alpha.1",
+  "name": "react-listbox",
   "author": "Mitch Smith",
+  "module": "dist/react-listbox.esm.js",
+  "version": "0.1.0",
   "license": "MIT",
-  "source": "src/index.js",
   "main": "dist/index.js",
-  "module": "dist/index.module.js",
-  "unpkg": "dist/index.umd.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
   "scripts": {
-    "build": "microbundle -i src/index.jsx -o dist"
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test --passWithNoTests",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build"
+  },
+  "peerDependencies": {
+    "react": ">=16"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn run lint"
+    }
   },
   "devDependencies": {
-    "microbundle": "^0.12.0"
-  },
-  "description": "React implementation of Tailwind's Vue Listbox",
-  "repository": "git@github.com:mitchbne/react-listbox.git",
-  "dependencies": {
-    "react": "^16.13.1"
+    "@types/react": "^16.9.46",
+    "@types/react-dom": "^16.9.8",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-import-resolver-webpack": "^0.12.2",
+    "eslint-plugin-compat": "^3.8.0",
+    "eslint-plugin-eslint-comments": "^3.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-only-var": "^0.1.2",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-react-hooks": "^4.0.8",
+    "husky": "^4.2.5",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "tsdx": "^0.13.2",
+    "tslib": "^2.0.1",
+    "typescript": "^3.9.7"
   }
 }

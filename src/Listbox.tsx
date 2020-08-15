@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 
-export const ListboxContext = React.createContext()
+export const ListboxContext = React.createContext({})
 
 export class Listbox extends Component {
   constructor(props){
