@@ -1,90 +1,78 @@
-{
-  "env": {
-    "browser": true,
-    "es6": true,
-    "node": true
+module.exports = {
+  env: {
+    browser: true,
+    es6: true,
+    node: true,
   },
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx", ".jpeg", ".png"]
-      }
-    }
-  },
-  "extends": [
+  settings: { "import/resolver": { node: { extensions: [".js", ".jsx", ".ts", ".tsx", ".jpeg", ".png"] } } },
+  extends: [
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:jest/recommended"
+    "plugin:jest/recommended",
   ],
-  "globals": {
-    "Atomics": "readonly",
-    "SharedArrayBuffer": "readonly"
+  globals: {
+    Atomics: "readonly",
+    SharedArrayBuffer: "readonly",
   },
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "ecmaVersion": 2018,
-    "sourceType": "module"
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    ecmaFeatures: { jsx: true },
+    ecmaVersion: 2018,
+    sourceType: "module",
   },
-  "plugins": [
+  plugins: [
     "react",
     "react-hooks",
     "compat",
     "import",
     "eslint-comments",
     "@typescript-eslint",
-    "jest"
+    "jest",
   ],
-  "rules": {
+  rules: {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "error",
-    "indent": ["error", 2],
+    indent: ["error", 2],
     "prefer-const": 2,
     "arrow-body-style": 2,
-    "arrow-parens": [2, "as-needed", {
-      "requireForBlockBody": true
-    }],
+    "arrow-parens": [2, "as-needed", { requireForBlockBody: true }],
     "no-var": 2,
     "no-undef": 2,
     "compat/compat": "error",
     "comma-dangle": ["error", {
-      "arrays": "always-multiline",
-      "objects": "always-multiline",
-      "imports": "always-multiline",
-      "exports": "always-multiline",
-      "functions": "never"
+      arrays: "always-multiline",
+      objects: "always-multiline",
+      imports: "always-multiline",
+      exports: "always-multiline",
+      functions: "never",
     }],
-    "curly": ["error", "all"],
-    "quotes": ["error", "double", {
-      "avoidEscape": true,
-      "allowTemplateLiterals": true
+    curly: ["error", "all"],
+    quotes: ["error", "double", {
+      avoidEscape: true,
+      allowTemplateLiterals: true,
     }],
-    "camelcase": "off",
-    "no-extend-native": ["error", {
-      "exceptions": ["Array", "String", "Date", "Number"]
-    }],
+    camelcase: "off",
+    "no-extend-native": ["error", { exceptions: ["Array", "String", "Date", "Number"] }],
     "no-multi-spaces": [2, {
-      "exceptions": {
-        "Property": true,
-        "VariableDeclarator": true,
-        "BinaryExpression": true,
-        "AssignmentExpression": true
+      exceptions: {
+        Property: true,
+        VariableDeclarator: true,
+        BinaryExpression: true,
+        AssignmentExpression: true,
       },
-      "ignoreEOLComments": true
+      ignoreEOLComments: true,
     }],
     "padded-blocks": [2, {
-      "blocks": "never",
-      "switches": "never"
+      blocks: "never",
+      switches: "never",
     }],
-    "semi": ["error", "never"],
+    semi: ["error", "never"],
     "no-bitwise": 2,
     "no-implicit-coercion": ["error", {
-      "boolean": false,
-      "number": false,
-      "string": true
+      boolean: false,
+      number: false,
+      string: true,
     }],
     "import/no-unresolved": 2,
     "import/named": 2,
@@ -95,9 +83,7 @@
     "import/export": 2,
     "import/no-nodejs-modules": 1,
     "import/first": 2,
-    "import/order": [2, {
-      "groups": ["builtin", "external", "internal", "parent", "sibling", "index"]
-    }],
+    "import/order": [2, { groups: ["builtin", "external", "internal", "parent", "sibling", "index"] }],
     "import/no-duplicates": 2,
     "import/extensions": 2,
     "import/newline-after-import": 2,
@@ -106,70 +92,50 @@
     "react/jsx-wrap-multilines": 2,
     "react/display-name": 1,
     "react/jsx-tag-spacing": [2, {
-      "beforeSelfClosing": "always",
-      "closingSlash": "never",
-      "afterOpening": "never"
+      beforeSelfClosing: "always",
+      closingSlash: "never",
+      afterOpening: "never",
     }],
     "react/jsx-closing-bracket-location": 2,
     "react/jsx-boolean-value": 2,
     "react/react-in-jsx-scope": 0,
-    "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+    "react/jsx-filename-extension": [2, { extensions: [".js", ".jsx", ".ts", ".tsx"] }],
     "react/jsx-pascal-case": 2,
-    "react/jsx-max-props-per-line": [2, {
-      "when": "multiline"
-    }],
+    "react/jsx-max-props-per-line": [2, { when: "multiline" }],
     "react/jsx-indent-props": [2, 2],
     "react/jsx-indent": [2, 2],
     "react/void-dom-elements-no-children": 2,
     "react/sort-comp": [2, {
-      "order": [
+      order: [
         "type-annotations",
         "static-methods",
         "lifecycle",
         "everything-else",
-        "render"
-      ]
+        "render",
+      ],
     }],
     "react/self-closing-comp": 2,
     "react/no-array-index-key": 2,
     "react/no-redundant-should-component-update": 2,
-    "react/no-multi-comp": [2, {
-      "ignoreStateless": true
-    }],
+    "react/no-multi-comp": [2, { ignoreStateless: true }],
     "react/prefer-es6-class": 2,
-    "react/prefer-stateless-function": [2, {
-      "ignorePureComponents": true
-    }],
+    "react/prefer-stateless-function": [2, { ignorePureComponents: true }],
     "react/no-direct-mutation-state": 2,
     "react/require-default-props": 2,
     "react/no-unused-prop-types": 2,
     "react/jsx-equals-spacing": [2, "never"],
-    "react/jsx-curly-spacing": [2, {
-      "when": "never"
-    }],
-    "react/jsx-sort-props": ["error", {
-      "ignoreCase": true
-    }],
+    "react/jsx-curly-spacing": [2, { when: "never" }],
+    "react/jsx-sort-props": ["error", { ignoreCase: true }],
     "no-console": 1,
     "array-bracket-spacing": [2, "never"],
     "object-curly-spacing": [2, "always"],
     "object-curly-newline": [2, {
-      "ObjectExpression": {
-        "multiline": true
-      },
-      "ObjectPattern": {
-        "multiline": true
-      },
-      "ImportDeclaration": {
-        "consistent": true
-      },
-      "ExportDeclaration": {
-        "consistent": true
-      }
+      ObjectExpression: { multiline: true },
+      ObjectPattern: { multiline: true },
+      ImportDeclaration: { consistent: true },
+      ExportDeclaration: { consistent: true },
     }],
-    "quote-props": [2, "as-needed", {
-      "numbers": true
-    }],
+    "quote-props": [2, "as-needed", { numbers: true }],
     "no-useless-computed-key": 2,
     "no-unexpected-multiline": "error",
     "react/no-typos": 2,
@@ -185,6 +151,6 @@
     "jest/no-identical-title": "error",
     "jest/prefer-to-have-length": "warn",
     "jest/valid-expect": "error",
-    "jest/expect-expect": 0
-  }
+    "jest/expect-expect": 0,
+  },
 }
