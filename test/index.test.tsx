@@ -3,39 +3,18 @@ import * as ReactDOM from "react-dom"
 import { Listbox, ListboxButton, ListboxLabel, ListboxList, ListboxOption } from "../src"
 
 describe("all components render", () => {
-  it("renders Listbox without crashing", () => {
+  it("renders without crashing", () => {
     const div = document.createElement("div")
     ReactDOM.render(
       <Listbox onChange={() => null} value="selectedVal">
+        <ListboxLabel>Select something</ListboxLabel>
         <ListboxButton>Click me</ListboxButton>
+        <ListboxList>
+          <ListboxOption value="item1">Item 1</ListboxOption>
+          <ListboxOption value="item2">Item 2</ListboxOption>
+          <ListboxOption value="item3">Item 3</ListboxOption>
+        </ListboxList>
       </Listbox>, div)
-    ReactDOM.unmountComponentAtNode(div)
-  })
-
-  it("renders ListboxButton without crashing", () => {
-    const div = document.createElement("div")
-    ReactDOM.render(<ListboxButton>Click me</ListboxButton>, div)
-    ReactDOM.unmountComponentAtNode(div)
-  })
-
-  it("renders ListboxLabel without crashing", () => {
-    const div = document.createElement("div")
-    ReactDOM.render(<ListboxLabel>Label</ListboxLabel>, div)
-    ReactDOM.unmountComponentAtNode(div)
-  })
-
-  it("renders ListboxList without crashing", () => {
-    const div = document.createElement("div")
-    ReactDOM.render(<ListboxList>
-      <ListboxOption value="testVal">testVal</ListboxOption>
-      <ListboxOption value="testVal2">testVal2</ListboxOption>
-    </ListboxList>, div)
-    ReactDOM.unmountComponentAtNode(div)
-  })
-
-  it("renders ListboxOption without crashing", () => {
-    const div = document.createElement("div")
-    ReactDOM.render(<ListboxOption value="anotherTestVal">anotherTestVal</ListboxOption>, div)
     ReactDOM.unmountComponentAtNode(div)
   })
 })

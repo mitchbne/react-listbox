@@ -1,9 +1,9 @@
 import React, { Component } from "react"
 import { ListboxContext } from "./Listbox"
-import { ListboxOption } from "."
+// import { ListboxOption } from "./ListboxOption"
 
 type Props = {
-  children: ListboxOption[],
+  children: React.ReactElement[],
   className?: string
 }
 
