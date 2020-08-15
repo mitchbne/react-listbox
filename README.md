@@ -19,7 +19,7 @@
 import React, { useState } from "react"
 import { Listbox, ListboxLabel, ListboxButton, ListboxList, ListboxOption } from "@mitchbne/react-listbox"
 
-export const SelectMenu = (): React.ReactNode => {
+export const SelectMenu = () => {
   const [selectedWrestler, setSelectedWrestler] = useState("Ric Flair")
   const wrestlers = [
     "Stone Cold Steven Austin",
