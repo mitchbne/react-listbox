@@ -17,7 +17,7 @@
 ### Ooh, another repo....but what does it do???
 I come across a lot of React libraries out there - some of them are great - and others leave me frustrated and angry. One of my biggest pet peeves is when a library forces you to use their CSS styles, and it completely contradicts the overall look and feel of your application. This library exposes an API of components that allow you to implement a Listbox solution in React - and you can style them how you want!
 
-I won't deny that this library had a lot of inspiration from TailwindLabs' Vue Listbox solution (which you can find ![here](https://tailwindlabs/tailwindui-vue)). It was rumoured that they would start working on their own React implementation soon (and if they do, I will probably deprecate this repository in favour of their solution - but until then, I need the library myself for my own projects 😂)
+I won't deny that this library had a lot of inspiration from TailwindLabs' Vue Listbox solution (which you can find <a href="https://tailwindlabs/tailwindui-vue">here</a> . It was rumoured that they would start working on their own React implementation soon (and if they do, I will probably deprecate this repository in favour of their solution - but until then, I need the library myself for my own projects 😂)
 
 ### Getting Started
 This package is meant to work alongisde any React application. Simply add the package to your list of dependencies, and make awesome projects 😎.
