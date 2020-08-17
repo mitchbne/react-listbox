@@ -1,3 +1,5 @@
+<img src="https://raw.githubusercontent.com/mitchben/react-listbox/master/.github/banner.png" alt="" style="max-width:100%;">
+
 <h2 align="center">
   React Listbox
 </h2>
@@ -34,7 +36,7 @@ yarn add @mitchbne/react-listbox
 
 ### Example Usage
 ```jsx
-import React, { useState } from "react"
+import React, { useState, Fragment } from "react"
 import { Listbox, ListboxLabel, ListboxButton, ListboxList, ListboxOption } from "@mitchbne/react-listbox"
 
 export const SelectMenu = () => {
@@ -60,8 +62,8 @@ export const SelectMenu = () => {
   return (
     <Listbox className="relative" onChange={setSelectedWrestler} value={selectedWrestler}>
       {({ isOpen }) => (
-        <>
-          <ListboxLabel className="sr-only">
+        <Fragment>
+          <ListboxLabel className="block mb-1">
             Select a wrestler:
           </ListboxLabel>
           <ListboxButton className="w-full focus:outline-none">
@@ -94,7 +96,7 @@ export const SelectMenu = () => {
               ))}
             </ListboxList>
           )}
-        </>
+        </Fragment>
       )}
     </Listbox>
   )

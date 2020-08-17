@@ -25,7 +25,7 @@ export const SelectMenu = (): React.ReactNode => {
     <Listbox className="relative" onChange={setSelectedWrestler} value={selectedWrestler}>
       {({ isOpen }) => (
         <>
-          <ListboxLabel className="sr-only">
+          <ListboxLabel className="block mb-1">
             Select a wrestler:
           </ListboxLabel>
           <ListboxButton className="w-full focus:outline-none">
