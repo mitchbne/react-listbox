@@ -47,6 +47,7 @@ export class ListboxList extends Component<Props, State> {
       break
     case "Tab":
       e.preventDefault()
+      this.context.close()
       break
     case "Up":
     case "ArrowUp":
