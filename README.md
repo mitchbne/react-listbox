@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/mitchben/react-listbox/master/.github/banner.png" alt="" style="max-width:100%;">
+<img src="https://raw.githubusercontent.com/mitchbne/react-listbox/master/.github/banner.png" alt="" style="max-width:100%;">
 
 <h2 align="center">
   React Listbox
