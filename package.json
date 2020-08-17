@@ -2,7 +2,7 @@
   "name": "@mitchbne/react-listbox",
   "author": "Mitch Smith",
   "module": "dist/react-listbox.esm.js",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
