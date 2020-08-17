@@ -18,7 +18,7 @@ React Listbox is a context driven component system that allows developers to cre
 
 Personally, I use a CSS framework called <a href="https://tailwindcss.com/">TailwindCSS</a> created by the team at TailwindLabs. Tailwind CSS is a highly customizable, low-level CSS framework that gives you all of the building blocks you need to build bespoke designs without any annoying opinionated styles you have to fight to override.
 
-Recently the developers at TailwindLabs implemented a Listbox components API (just like this one) built for Vue developers. They promised that they would begin working on a React implementation of the Listbox soon, but I couldn't wait. In the meantime I've created this solution, maybe it will help you too.
+Recently the developers at TailwindLabs <a href="https://github.com/tailwindlabs/tailwindui-vue">implemented a Listbox component API</a> (just like this one) built for Vue developers. They promised that they would begin working on a React implementation of the Listbox soon, but I couldn't wait. In the meantime I've created this solution, maybe it will help you too.
 
 _**Note: This solution comes completely unstyled. You will need to style it yourself.**_
 
@@ -30,10 +30,12 @@ yarn add @mitchbne/react-listbox
 ```
 
 ### To Do
-- [x] Create a JSX replication of TailwindLab's Vue Listbox solution
-- [x] Add Typescript support for components
-- [x] Turn the components into an installable library
+- [x] Create a JSX replication of TailwindLab's Vue Listbox <a href="https://github.com/tailwindlabs/tailwindui-vue">solution</a>.
+- [x] Add Typescript support for components.
+- [x] Turn the components into an installable library.
 - [ ] Add support for the ListboxList component to be a React Portal.
+- [ ] Create a multi-select solution.
+- [ ] Create an input-filter solution.
 
 ### Basic Example
 ```jsx
