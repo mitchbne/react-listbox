@@ -39,7 +39,6 @@ yarn add @mitchbne/react-listbox
 - [ ] Add support for the ListboxList component to be a React Portal.
 - [ ] Create a multi-select solution.
 - [ ] Handle disabled ListboxOption
-- [ ] Fix where ListboxOption value and innerText are different (for typeahead)
 - [ ] Create an input-filter solution.
 
 ### Basic Example
