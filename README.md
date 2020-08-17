@@ -149,7 +149,7 @@ export default null
 ### Advanced TailwindCSS Example
 ```jsx
 import React, { useState, Fragment } from "react"
-import { Listbox, ListboxLabel, ListboxButton, ListboxList, ListboxOption } from "../."
+import { Listbox, ListboxLabel, ListboxButton, ListboxList, ListboxOption } from "@mitchbne/react-listbox"
 
 export const AlternativeSelectMenu = (): React.ReactNode => {
   const [selectedPersonId, setSelectedPersonId] = useState("2f8807fd-f9ec-4b52-ad01-51f9d714e3d2")
