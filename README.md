@@ -14,10 +14,13 @@
 
 ---
 
-### Ooh, another repo....but what does it do???
-I come across a lot of React libraries out there - some of them are great - and others leave me frustrated and angry. One of my biggest pet peeves is when a library forces you to use their CSS styles, and it completely contradicts the overall look and feel of your application. This library exposes an API of components that allow you to implement a Listbox solution in React - and you can style them how you want!
+React Listbox is a context driven component system that allows developers to create a <a href="https://www.w3.org/TR/wai-aria-practices-1.1/#Listbox">Listbox</a> built with React.
 
-I won't deny that this library had a lot of inspiration from TailwindLabs' Vue Listbox solution (which you can find <a href="https://tailwindlabs/tailwindui-vue">here</a>). It was rumoured that they would start working on their own React implementation soon (and if they do, I will probably deprecate this repository in favour of their solution - but until then, I need the library myself for my own projects 😂)
+Personally, I use a CSS framework called <a href="https://tailwindcss.com/">TailwindCSS</a> created by the team at TailwindLabs. Tailwind CSS is a highly customizable, low-level CSS framework that gives you all of the building blocks you need to build bespoke designs without any annoying opinionated styles you have to fight to override.
+
+Recently the developers at TailwindLabs implemented a Listbox components API (just like this one) built for Vue developers. They promised that they would begin working on a React implementation of the Listbox soon, but I couldn't wait. In the meantime I've created this solution, maybe it will help you too.
+
+_**Note: This solution comes completely unstyled. You will need to style it yourself.**_
 
 ### Getting Started
 This package is meant to work alongisde any React application. Simply add the package to your list of dependencies, and make awesome projects 😎.
@@ -32,7 +35,41 @@ yarn add @mitchbne/react-listbox
 - [x] Turn the components into an installable library
 - [ ] Add support for the ListboxList component to be a React Portal.
 
-### Example Usage
+### Basic Example
+```jsx
+import React, { useState, Fragment } from "react"
+import { Listbox, ListboxLabel, ListboxButton, ListboxList, ListboxOption } from "@mitchbne/react-listbox"
+
+export const SelectMenu = () => {
+  const [selectedOption, setSelectedOption] = useState("Option 1")
+  const options = [
+    "Option 1",
+    "Option 2",
+    "Option 3",
+  ]
+
+  return (
+    <Listbox onChange={setSelectedOption} value={selectedOption}>
+        <Fragment>
+          <ListboxLabel>
+            Select an option:
+          </ListboxLabel>
+          <ListboxButton>
+              { selectedOption ? selectedOption : "Select an option" }
+          </ListboxButton>
+            <ListboxList>
+              { options.map(option => (
+                <ListboxOption key={option} value={option}> {option} </ListboxOption>
+              ))}
+            </ListboxList>
+          )}
+        </Fragment>
+      )}
+    </Listbox>
+  )
+}
+```
+### TailwindCSS Example
 ```jsx
 import React, { useState, Fragment } from "react"
 import { Listbox, ListboxLabel, ListboxButton, ListboxList, ListboxOption } from "@mitchbne/react-listbox"
