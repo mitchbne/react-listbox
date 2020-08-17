@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, Fragment } from "react"
 import { Listbox, ListboxLabel, ListboxButton, ListboxList, ListboxOption } from "../."
 
 export const SelectMenu = (): React.ReactNode => {
@@ -24,7 +24,7 @@ export const SelectMenu = (): React.ReactNode => {
   return (
     <Listbox className="relative" onChange={setSelectedWrestler} value={selectedWrestler}>
       {({ isOpen }) => (
-        <>
+        <Fragment>
           <ListboxLabel className="block mb-1">
             Select a wrestler:
           </ListboxLabel>
@@ -58,7 +58,7 @@ export const SelectMenu = (): React.ReactNode => {
               ))}
             </ListboxList>
           )}
-        </>
+        </Fragment>
       )}
     </Listbox>
   )
