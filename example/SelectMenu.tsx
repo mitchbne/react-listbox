@@ -1,5 +1,6 @@
 import * as React from "react"
 import { Listbox, ListboxLabel, ListboxButton, ListboxList, ListboxOption } from "../."
+import cn from "./utils/cn"
 
 export const SelectMenu = (): React.ReactElement => {
   const [selectedWrestler, setSelectedWrestler] = React.useState<string | null>(null)
@@ -43,11 +44,11 @@ export const SelectMenu = (): React.ReactElement => {
               { wrestlers.map(wrestler => (
                 <ListboxOption className="curor-default select-none" key={wrestler} value={wrestler}>
                   {({ isActive, isSelected }) => (
-                    <div className={`relative px-2 py-2 ${isActive ? " bg-blue-600 text-white" : ""}`}>
-                      {wrestler}
+                    <div className={cn( "relative px-2 py-2", isActive && "bg-blue-600 text-white")} >
+                      { wrestler }
                       { isSelected && (
                         <span className="absolute inset-y-0 right-1 flex items-center">
-                          <svg className={`h-5 w-5 ${isActive ? "text-white": "text-gray-700" }`} fill="currentColor" viewBox="0 0 20 20">
+                          <svg className={cn("h-5 w-5", isActive ? "text-white": "text-gray-700")} fill="currentColor" viewBox="0 0 20 20">
                             <path clipRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" fillRule="evenodd" />
                           </svg>
                         </span>
