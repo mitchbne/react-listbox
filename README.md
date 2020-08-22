@@ -36,8 +36,8 @@ yarn add @mitchbne/react-listbox
 - [x] Create a JSX replication of TailwindLab's Vue Listbox <a href="https://github.com/tailwindlabs/tailwindui-vue">solution</a>.
 - [x] Add Typescript support for components.
 - [x] Turn the components into an installable library.
-- [ ] Home (key) moves the focus and activeItem to the first option.
-- [ ] End (key) moves the focus and activeItem to the first option.
+- [x] Home (key) moves the focus and activeItem to the first option.
+- [x] End (key) moves the focus and activeItem to the last option.
 - [x] Selects/focus the first selected option when opened (`if activeItem == null`)
 - [ ] Create a multi-select solution.
   - [ ] Multi selects focus the first selected option when opened

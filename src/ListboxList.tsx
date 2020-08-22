@@ -49,6 +49,14 @@ export class ListboxList extends Component<Props, State> {
       e.preventDefault()
       this.context.close()
       break
+    case "End":
+      e.preventDefault()
+      this.context.focus(this.state.values[this.state.values.length - 1])
+      break
+    case "Home":
+      e.preventDefault()
+      this.context.focus(this.state.values[0])
+      break
     case "Up":
     case "ArrowUp":
       e.preventDefault()
