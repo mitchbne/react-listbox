@@ -1,4 +1,5 @@
 {
+  "exclude": ["dist"],
   "compilerOptions": {
     "allowSyntheticDefaultImports": false,
     "target": "es5",

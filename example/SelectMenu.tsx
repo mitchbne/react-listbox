@@ -1,8 +1,8 @@
-import React, { useState, Fragment } from "react"
+import * as React from "react"
 import { Listbox, ListboxLabel, ListboxButton, ListboxList, ListboxOption } from "../."
 
-export const SelectMenu = (): React.ReactNode => {
-  const [selectedWrestler, setSelectedWrestler] = useState("Ric Flair")
+export const SelectMenu = (): React.ReactElement => {
+  const [selectedWrestler, setSelectedWrestler] = React.useState<string | null>(null)
   const wrestlers = [
     "Stone Cold Steven Austin",
     "Bret Hart",
@@ -24,7 +24,7 @@ export const SelectMenu = (): React.ReactNode => {
   return (
     <Listbox className="relative" onChange={setSelectedWrestler} value={selectedWrestler}>
       {({ isOpen }) => (
-        <Fragment>
+        <React.Fragment>
           <ListboxLabel className="block mb-1">
             Select a wrestler:
           </ListboxLabel>
@@ -58,7 +58,7 @@ export const SelectMenu = (): React.ReactNode => {
               ))}
             </ListboxList>
           )}
-        </Fragment>
+        </React.Fragment>
       )}
     </Listbox>
   )

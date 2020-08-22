@@ -1,8 +1,8 @@
-import React, { useState, Fragment } from "react"
+import * as React from "react"
 import { Listbox, ListboxLabel, ListboxButton, ListboxList, ListboxOption } from "../."
 
-export const AlternativeSelectMenu = (): React.ReactNode => {
-  const [selectedPersonId, setSelectedPersonId] = useState("2f8807fd-f9ec-4b52-ad01-51f9d714e3d2")
+export const AlternativeSelectMenu = (): React.ReactElement => {
+  const [selectedPersonId, setSelectedPersonId] = React.useState<string | null>(null)
   const people = [
     { id: "5bbb4afc-d23d-4f33-b84a-251f0aafe8d4", name: "Mr. Louisa Durgan", avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/jagan123/128.jpg" },
     { id: "807e05d8-0896-42e0-9f9f-12c493be0da5", name: "Maudie Collier II", avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/ruehldesign/128.jpg" },
@@ -25,7 +25,7 @@ export const AlternativeSelectMenu = (): React.ReactNode => {
   return (
     <Listbox className="relative" onChange={setSelectedPersonId} value={selectedPersonId}>
       {({ isOpen }) => (
-        <Fragment>
+        <React.Fragment>
           <ListboxLabel className="block mb-1">
             Assign project to:
           </ListboxLabel>
@@ -34,10 +34,10 @@ export const AlternativeSelectMenu = (): React.ReactNode => {
               <span className={`rounded px-3 py-2 border w-full text-left bg-white inline-flex items-center justify-between ${isFocused || isOpen ? "border-blue-300 shadow-outline": "border-gray-300"}`}>
                 <span className="inline-flex items-center space-x-3">
                   { selectedPersonId ? (
-                    <Fragment>
+                    <React.Fragment>
                       <img alt={selectedPerson?.name} className="h-6 w-6 rounded-full " src={selectedPerson?.avatar} />
                       <span>{selectedPerson?.name}</span>
-                    </Fragment>
+                    </React.Fragment>
                   ) : "Select a person..."}
                 </span>
                 <svg className="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
@@ -69,7 +69,7 @@ export const AlternativeSelectMenu = (): React.ReactNode => {
               ))}
             </ListboxList>
           )}
-        </Fragment>
+        </React.Fragment>
       )}
     </Listbox>
   )

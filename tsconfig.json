@@ -1,5 +1,6 @@
 {
   "include": ["src", "types"],
+  "exclude": ["dist"],
   "compilerOptions": {
     "module": "esnext",
     "lib": ["dom", "esnext"],

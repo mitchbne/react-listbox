@@ -5,8 +5,8 @@ export const ListboxContext = React.createContext({})
 type Props = {
   children: React.ReactNode,
   className?: string,
-  value: string,
-  onChange: (value: string) => void
+  value: string | null,
+  onChange: (value: string | null) => void
 }
 
 type State = {
@@ -14,8 +14,8 @@ type State = {
   listboxButtonRef: HTMLElement | null,
   listboxListRef: HTMLElement | null,
   isOpen: boolean,
-  activeItem: string,
-  values: string[],
+  activeItem: string | null,
+  values: Array<string | null>,
   labelId: string | null,
   buttonId: string | null,
   optionIds: Array<[string, string]>,
@@ -112,7 +112,7 @@ export class Listbox extends Component<Props, State> {
     })
   }
 
-  focus = (value: string): void => {
+  focus = (value: string | null): void => {
     this.setState({ activeItem: value }, () => {
       if (value === null){ return }
       this.state.listboxListRef?.children[this.state.values.indexOf(this.state.activeItem)].scrollIntoView({ block: "nearest" })
