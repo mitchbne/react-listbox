@@ -61,14 +61,14 @@ export class Listbox extends Component<Props, State> {
           return el.innerText.toLowerCase().startsWith(this.state.typeahead.toLowerCase())
         }
       ) || [null]
-  
+
       if (match !== null) { this.focus(match) }
-  
+
       this.clearTypeahead()
     })
   }
 
-  clearTypeahead = (): void => { 
+  clearTypeahead = (): void => {
     setTimeout(() => {this.setState({ typeahead: "" }) }, 500)
   }
 
@@ -87,7 +87,12 @@ export class Listbox extends Component<Props, State> {
     this.setState({ isOpen: true }, () => {
       process.nextTick(() => {
         if (this.state.listboxListRef){
-          this.focus(this.props.value)
+          let activeValue = this.props.value
+          // Set active value to be the first option
+          // in the list if no item is selected.
+          // https://www.w3.org/TR/wai-aria-practices/#listbox_kbd_interaction
+          if (!activeValue){ activeValue = this.state.values[0] }
+          this.focus(activeValue)
           process.nextTick(() => {
             this.state.listboxListRef?.focus()
           })
@@ -95,18 +100,18 @@ export class Listbox extends Component<Props, State> {
       })
     })
   }
-  
+
   close = (): void => {
     this.setState({ isOpen: false }, () => { this.state.listboxButtonRef?.focus() })
   }
-  
+
   select = (value: string): void => {
     this.props.onChange(value)
     process.nextTick(() => {
       this.close()
     })
   }
-  
+
   focus = (value: string): void => {
     this.setState({ activeItem: value }, () => {
       if (value === null){ return }
