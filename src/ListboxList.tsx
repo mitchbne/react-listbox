@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import { ListboxContext } from "./Listbox"
-// import { ListboxOption } from "./ListboxOption"
 
 type Props = {
   children: React.ReactElement[],
@@ -21,7 +20,7 @@ export class ListboxList extends Component<Props, State> {
     super(props)
     this.state = { focusedIndex: null, values: null }
   }
-  
+
   componentDidMount(): void{
     this.context.setListboxListRef(this.ownRef)
     const values: string[] = this.props.children.map(node => node.props.value)
@@ -112,7 +111,7 @@ export class ListboxList extends Component<Props, State> {
       </ul>
     )
   }
-} 
+}
 
 ListboxList.contextType = ListboxContext
 
