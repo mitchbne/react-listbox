@@ -5,8 +5,8 @@
   "license": "MIT",
   "source":  "./index.tsx",
   "scripts": {
-    "start": "NODE_ENV=development yarn run tailwindcss && parcel index.html",
-    "build": "NODE_ENV=production yarn run tailwindcss:prod && parcel build index.html",
+    "start": "NODE_ENV=development yarn run tailwindcss && start-storybook -p 6006",
+    "build": "NODE_ENV=production yarn run tailwindcss:prod && build-storybook",
     "tailwindcss": "tailwindcss build -o ./tailwind.css",
     "tailwindcss:prod": "tailwindcss build -o ./tailwind.css"
   },
@@ -21,6 +21,13 @@
     "@types/react-dom": "^16.8.4",
     "parcel": "^1.12.3",
     "tailwindcss": "^1.6.2",
-    "typescript": "^3.4.5"
+    "typescript": "^3.4.5",
+    "@babel/core": "^7.11.4",
+    "@storybook/addon-actions": "^6.0.16",
+    "@storybook/addon-essentials": "^6.0.16",
+    "@storybook/addon-links": "^6.0.16",
+    "@storybook/react": "^6.0.16",
+    "react-is": "^16.13.1",
+    "babel-loader": "^8.1.0"
   }
 }
