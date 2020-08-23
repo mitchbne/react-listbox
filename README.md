@@ -36,9 +36,9 @@ yarn add @mitchbne/react-listbox
 - [x] Create a JSX replication of TailwindLab's Vue Listbox <a href="https://github.com/tailwindlabs/tailwindui-vue">solution</a>.
 - [x] Add Typescript support for components.
 - [x] Turn the components into an installable library.
-- [ ] Home (key) moves the focus and activeItem to the first option.
-- [ ] End (key) moves the focus and activeItem to the last option.
-- [ ] Selects/focus the first selected option when opened (`if activeItem == null`)
+- [x] Home (key) moves the focus and activeItem to the first option.
+- [x] End (key) moves the focus and activeItem to the last option.
+- [x] Selects/focus the first selected option when opened (`if activeItem == null`)
 - [ ] Create a multi-select solution.
   - [ ] Multi selects focus the first selected option when opened
   - [ ] Shift + Down Arrow: Moves focus to and toggles the selected state of the next option.
@@ -48,7 +48,6 @@ yarn add @mitchbne/react-listbox
   - [ ] Control + Shift + End: Selects the focused option and all options down to the last option. Optionally, moves focus to the last option.
   - [ ] Control + A: Selects all options in the list. Optionally, if all options are selected, it may also unselect all options.
 - [ ] Add support for the ListboxList component to be a React Portal.
-- [ ] Create a multi-select solution.
 - [ ] Handle disabled ListboxOption
 - [ ] Create an input-filter solution.
 

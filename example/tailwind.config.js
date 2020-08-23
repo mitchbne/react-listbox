@@ -2,6 +2,7 @@
 const defaultTheme = require("tailwindcss/defaultTheme")
 
 module.exports = {
+  future: "all",
   purge: {
     mode: "all",
     content: [

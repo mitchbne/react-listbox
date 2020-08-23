@@ -1,5 +1,6 @@
 {
   "include": ["src", "types", "example/stories"],
+  "exclude": ["dist"],
   "compilerOptions": {
     "module": "esnext",
     "lib": ["dom", "esnext"],
