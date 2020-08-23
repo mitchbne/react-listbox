@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.tsx",
   "license": "MIT",
-  "source":  "./index.tsx",
+  "source": "./index.tsx",
   "scripts": {
     "start": "NODE_ENV=development yarn run tailwindcss && start-storybook -p 6006",
     "build": "NODE_ENV=production yarn run tailwindcss:prod && build-storybook",
@@ -16,18 +16,18 @@
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
-    "@tailwindcss/ui": "^0.5.0",
-    "@types/react": "^16.9.11",
-    "@types/react-dom": "^16.8.4",
-    "parcel": "^1.12.3",
-    "tailwindcss": "^1.6.2",
-    "typescript": "^3.4.5",
     "@babel/core": "^7.11.4",
     "@storybook/addon-actions": "^6.0.16",
     "@storybook/addon-essentials": "^6.0.16",
     "@storybook/addon-links": "^6.0.16",
     "@storybook/react": "^6.0.16",
+    "@tailwindcss/ui": "^0.5.0",
+    "@types/react": "^16.9.11",
+    "@types/react-dom": "^16.8.4",
+    "babel-loader": "^8.1.0",
+    "parcel": "^1.12.3",
     "react-is": "^16.13.1",
-    "babel-loader": "^8.1.0"
+    "tailwindcss": "^1.6.2",
+    "typescript": "3.4.5"
   }
 }
