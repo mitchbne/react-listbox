@@ -1,4 +1,4 @@
-import React from "react"
+import * as React from "react"
 import { Meta } from "@storybook/react"
 import {
   Listbox,
@@ -6,9 +6,9 @@ import {
   ListboxButton,
   ListboxList,
   ListboxOption,
-} from "../../src"
-import cn from "../utils/cn"
-import "../tailwind.css"
+} from "../src"
+import cn from "./utils/cn"
+import "./tailwind.css"
 
 export default {
   title: "Example/Listbox",

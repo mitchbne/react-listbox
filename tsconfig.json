@@ -1,6 +1,6 @@
 {
-  "include": ["src", "types", "example/stories"],
-  "exclude": ["dist"],
+  "include": ["src", "types"],
+  "exclude": ["dist", "storybook-static"],
   "compilerOptions": {
     "module": "esnext",
     "lib": ["dom", "esnext"],
@@ -16,6 +16,7 @@
     "moduleResolution": "node",
     "baseUrl": "./",
     "paths": {
+      "@": ["./"],
       "*": ["src/*", "node_modules/*"]
     },
     "jsx": "react",
