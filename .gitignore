@@ -5,3 +5,4 @@ node_modules
 dist
 tailwind.css
 **/tailwind.css
+storybook-static/
