@@ -9,7 +9,7 @@ import {
   ListboxOption,
 } from "../src"
 
-describe("given listbox is determined by isOpen prop", () => {
+describe("given listbox is determined by isOpen", () => {
   const onChange = jest.fn()
   const optionValues = ["item1", "item2", "item3"]
   
