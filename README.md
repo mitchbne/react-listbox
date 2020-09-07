@@ -20,6 +20,8 @@ Personally, I use a CSS framework called <a href="https://tailwindcss.com/">Tail
 
 Recently the developers at TailwindLabs <a href="https://github.com/tailwindlabs/tailwindui-vue">implemented a Listbox component API</a> (just like this one) built for Vue developers. They promised that they would begin working on a React implementation of the Listbox soon, but I couldn't wait. In the meantime I've created this solution, maybe it will help you too.
 
+Made with love ❤️
+
 _**Note: This solution comes completely unstyled. You will need to style it yourself.**_
 
 ### Demo
