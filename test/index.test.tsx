@@ -12,35 +12,27 @@ import {
 describe("given listbox is determined by isOpen", () => {
   const onChange = jest.fn()
   const optionValues = ["item1", "item2", "item3"]
+  const value = "item2"
   
-  beforeEach(() => {
-    render(
-      <Listbox onChange={onChange} value="selectedVal">
-        {({ isOpen }: { isOpen: boolean }) => (
-          <>
-            <ListboxLabel>Select something</ListboxLabel>
-            <ListboxButton>Click me</ListboxButton>
-            {isOpen && <ListboxList>
-              <ListboxOption value={optionValues[0]}>Item 1</ListboxOption>
-              <ListboxOption value={optionValues[1]}>Item 2</ListboxOption>
-              <ListboxOption value={optionValues[2]}>Item 3</ListboxOption>
-            </ListboxList>}
-          </>
-        )}
-      </Listbox>
-    )
-  })
-
   describe("by default", () => {
+    beforeEach(() => setup({ onChange, optionValues, value }))
+
     it("the listbox should be closed", () => {
       const listbox = screen.queryByRole("listbox")
       expect(listbox).not.toBeInTheDocument()
+    })
+
+    it("the button is labeled by the label component", () => {
+      const label = screen.getByLabelText("Select something")
+      const button = screen.getByRole("button")
+      expect(label).toContainElement(button)
     })
   })
   
   describe("when clicking on the button", () => {
     beforeEach(() => {
-      screen.getByRole("button").click()
+      setup({ onChange, optionValues, value })
+      userEvent.click(screen.getByText("Click me"))
     })
 
     it("then displays the listbox", () => {
@@ -57,5 +49,67 @@ describe("given listbox is determined by isOpen", () => {
         expect(onChange).toHaveBeenCalledWith(optionValues[0])
       })
     })
+  })
+
+  describe("given an option is selected", () => {
+    beforeEach(() => {
+      setup({ onChange, optionValues, value })
+      userEvent.click(screen.getByText("Click me"))
+    })
+    
+    it("has a selected state", () => {
+      const option = screen.getByText("Item 2 selected")
+      expect(option).toBeInTheDocument()
+    })
+  })
+
+  describe("given an option is NOT selected", () => {
+    beforeEach(() => {
+      setup({ onChange, optionValues, value: "item1" })
+      userEvent.click(screen.getByText("Click me"))
+    })
+    
+    it("has a selected state", () => {
+      const option = screen.getByText("Item 2 not selected")
+      expect(option).toBeInTheDocument()
+    })
+  })
+
+  describe("given an option is active", () => {
+    beforeEach(() => {
+      setup({ onChange, optionValues, value })
+      userEvent.click(screen.getByText("Click me"))
+      // NOT active before hover
+      userEvent.hover(screen.getByText("Item 3 not active"))
+    })
+    
+    it("has a selected state", () => {
+      const option = screen.getByText("Item 3 active")
+      expect(option).toBeInTheDocument()
+    })
   })  
 })
+
+interface Setup {
+  onChange: () => void;
+  optionValues: string[];
+  value: string;
+}
+
+function setup({ onChange, optionValues, value }: Setup) {
+  render(
+    <Listbox onChange={onChange} value={value}>
+      {({ isOpen }: { isOpen: boolean }) => (
+        <>
+          <ListboxLabel>Select something</ListboxLabel>
+          <ListboxButton>Click me</ListboxButton>
+          {isOpen && <ListboxList>
+            <ListboxOption value={optionValues[0]}>Item 1</ListboxOption>
+            <ListboxOption value={optionValues[1]}>{({ isSelected }) => <>{isSelected ? "Item 2 selected" : "Item 2 not selected"}</>}</ListboxOption>
+            <ListboxOption value={optionValues[2]}>{({ isActive }) => <>{isActive ? "Item 3 active" : "Item 3 not active"}</>}</ListboxOption>
+          </ListboxList>}
+        </>
+      )}
+    </Listbox>
+  )
+}
