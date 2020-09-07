@@ -31,6 +31,13 @@ describe("given listbox is determined by isOpen", () => {
     )
   })
 
+  describe("by default", () => {
+    it("the listbox should be closed", () => {
+      const listbox = screen.queryByRole("listbox")
+      expect(listbox).not.toBeInTheDocument()
+    })
+  })
+  
   describe("when clicking on the button", () => {
     beforeEach(() => {
       screen.getByRole("button").click()
