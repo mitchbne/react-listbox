@@ -27,6 +27,11 @@ describe("given listbox is determined by isOpen", () => {
       const button = screen.getByRole("button")
       expect(label).toContainElement(button)
     })
+
+    it("the button is not focused", () => {
+      const button = screen.getByRole("button")
+      expect(button).toHaveTextContent("Click me")
+    })
   })
   
   describe("when clicking on the button", () => {
@@ -50,6 +55,19 @@ describe("given listbox is determined by isOpen", () => {
       })
     })
   })
+
+  describe("when focus shifts to the button", () => {
+    beforeEach(() => {
+      setup({ onChange, optionValues, value })
+      userEvent.tab()
+    })
+
+    it("the button appears focused", () => {
+      const button = screen.getByRole("button")
+      expect(button).toHaveTextContent("Click me (focused)")
+    })
+  })
+  
 
   describe("given an option is selected", () => {
     beforeEach(() => {
@@ -102,7 +120,7 @@ function setup({ onChange, optionValues, value }: Setup) {
       {({ isOpen }: { isOpen: boolean }) => (
         <>
           <ListboxLabel>Select something</ListboxLabel>
-          <ListboxButton>Click me</ListboxButton>
+          <ListboxButton>{({ isFocused }) => <>{isFocused ? "Click me (focused)" : "Click me"}</>}</ListboxButton>
           {isOpen && <ListboxList>
             <ListboxOption value={optionValues[0]}>Item 1</ListboxOption>
             <ListboxOption value={optionValues[1]}>{({ isSelected }) => <>{isSelected ? "Item 2 selected" : "Item 2 not selected"}</>}</ListboxOption>
