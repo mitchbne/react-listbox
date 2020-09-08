@@ -50,8 +50,9 @@ export class ListboxOption extends Component<Props, State> {
         onMouseDown={this.handleClick}
         onMouseMove={this.handleMouseMove}
         ref={el => this.ownRef = el}
+        role="option"
         tabIndex={-1}
-        {...isSelected ? { "aria-selected": true, role: "option" } : {}}
+        {...isSelected ? { "aria-selected": true } : {}}
       >
         { children instanceof Function ? children({ isSelected, isActive }) : children }
       </li>
