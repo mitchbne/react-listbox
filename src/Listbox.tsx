@@ -124,7 +124,7 @@ export class Listbox extends Component<Props, State> {
   focus = (value: string | null): void => {
     this.setState({ activeItem: value }, () => {
       if (value === null){ return }
-      this.state.listboxListRef?.children[this.state.values.indexOf(this.getFocusItem())].scrollIntoView({ block: "nearest" })
+      this.state.listboxListRef?.children[this.state.values.indexOf(this.getFocusValue())].scrollIntoView({ block: "nearest" })
     })
   }
 
