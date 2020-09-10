@@ -5,8 +5,9 @@ export const ListboxContext = React.createContext({})
 type Props = {
   children: React.ReactNode,
   className?: string,
-  value: string | null,
-  onChange: (value: string | null) => void
+  value: string | string[] | null,
+  onChange: (value: string | string[] | null) => void
+  multiselect?: boolean;
 }
 
 type State = {
@@ -14,7 +15,7 @@ type State = {
   listboxButtonRef: HTMLElement | null,
   listboxListRef: HTMLElement | null,
   isOpen: boolean,
-  activeItem: string | null,
+  activeItem: string | string[] | null,
   values: Array<string | null>,
   labelId: string | null,
   buttonId: string | null,
@@ -92,7 +93,7 @@ export class Listbox extends Component<Props, State> {
           // in the list if no item is selected.
           // https://www.w3.org/TR/wai-aria-practices/#listbox_kbd_interaction
           if (!activeValue){ activeValue = this.state.values[0] }
-          this.focus(activeValue)
+          this.focus(this.getFocusItem())
           process.nextTick(() => {
             this.state.listboxListRef?.focus()
           })
@@ -101,21 +102,30 @@ export class Listbox extends Component<Props, State> {
     })
   }
 
+  getFocusItem = (): string | null => {
+    const activeValue = this.props.value
+    return Array.isArray(activeValue) ? activeValue[0] : activeValue
+  }
+
   close = (): void => {
     this.setState({ isOpen: false }, () => { this.state.listboxButtonRef?.focus() })
   }
 
   select = (value: string): void => {
-    this.props.onChange(value)
-    process.nextTick(() => {
-      this.close()
-    })
+    if (!this.props.multiselect) {
+      this.props.onChange(value)
+      process.nextTick(() => {
+        this.close()
+      })
+    } else if (this.props.value !== null && Array.isArray(this.props.value)) {
+      this.props.onChange([value, ...this.props.value])
+    }
   }
 
   focus = (value: string | null): void => {
     this.setState({ activeItem: value }, () => {
       if (value === null){ return }
-      this.state.listboxListRef?.children[this.state.values.indexOf(this.state.activeItem)].scrollIntoView({ block: "nearest" })
+      this.state.listboxListRef?.children[this.state.values.indexOf(this.getFocusItem())].scrollIntoView({ block: "nearest" })
     })
   }
 

@@ -42,7 +42,7 @@ export class ListboxOption extends Component<Props, State> {
   render(): React.ReactNode{
     const { children, className } = this.props
     const isActive = this.context.activeItem === this.props.value
-    const isSelected = this.context.props.value === this.props.value
+    const isSelected = this.context.props.value === this.props.value || (Array.isArray(this.context.props.value) && this.context.props.value.includes(this.props.value))
     return (
       <li
         className={className}
