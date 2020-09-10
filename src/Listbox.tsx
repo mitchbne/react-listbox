@@ -88,12 +88,7 @@ export class Listbox extends Component<Props, State> {
     this.setState({ isOpen: true }, () => {
       process.nextTick(() => {
         if (this.state.listboxListRef){
-          let activeValue = this.props.value
-          // Set active value to be the first option
-          // in the list if no item is selected.
-          // https://www.w3.org/TR/wai-aria-practices/#listbox_kbd_interaction
-          if (!activeValue){ activeValue = this.state.values[0] }
-          this.focus(this.getFocusItem())
+          this.focus(this.getFocusValue())
           process.nextTick(() => {
             this.state.listboxListRef?.focus()
           })
@@ -102,8 +97,12 @@ export class Listbox extends Component<Props, State> {
     })
   }
 
-  getFocusItem = (): string | null => {
+  getFocusValue = (): string | null => {
     const activeValue = this.props.value
+    // Set active value to be the first option
+    // in the list if no item is selected.
+    // https://www.w3.org/TR/wai-aria-practices/#listbox_kbd_interaction
+    if (!activeValue){ return this.state.values[0] }
     return Array.isArray(activeValue) ? activeValue[0] : activeValue
   }
 
