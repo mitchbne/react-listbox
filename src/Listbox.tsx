@@ -5,17 +5,18 @@ export const ListboxContext = React.createContext({})
 interface SharedProps {
   children: React.ReactNode;
   className?: string;
-  onChange: (value: string | string[] | null) => void;
 }
 
 interface SingleselectProps extends SharedProps {
   multiselect?: false;
   value: string | null;
+  onChange: (value: string | null) => void;
 }
 
 interface MultiselectProps extends SharedProps {
   multiselect: true;
   values: string[];
+  onChange: (value: string[]) => void;
 }
 
 type Props = SingleselectProps | MultiselectProps
