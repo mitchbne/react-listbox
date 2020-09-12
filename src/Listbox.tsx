@@ -11,13 +11,11 @@ interface SharedProps {
 interface SingleselectProps extends SharedProps {
   multiselect?: false;
   value: string | null;
-  values: never;
 }
 
 interface MultiselectProps extends SharedProps {
   multiselect: true;
   values: string[];
-  value: never;
 }
 
 type Props = SingleselectProps | MultiselectProps
