@@ -2,20 +2,30 @@ import React, { Component } from "react"
 
 export const ListboxContext = React.createContext({})
 
-type Props = {
+interface SharedProps {
   children: React.ReactNode,
   className?: string,
-  value: string | string[] | null,
   onChange: (value: string | string[] | null) => void
-  multiselect?: boolean;
 }
+
+interface SingleselectProps extends SharedProps {
+  multiselect: false;
+  value: string | null,
+}
+
+interface MultiselectProps extends SharedProps {
+  multiselect: true;
+  values: string[];
+}
+
+type Props = SingleselectProps | MultiselectProps
 
 type State = {
   typeahead: string,
   listboxButtonRef: HTMLElement | null,
   listboxListRef: HTMLElement | null,
   isOpen: boolean,
-  activeItem: string | string[] | null,
+  activeItem: string | null,
   values: Array<string | null>,
   labelId: string | null,
   buttonId: string | null,
@@ -24,6 +34,8 @@ type State = {
 }
 
 export class Listbox extends Component<Props, State> {
+  static defaultProps = { values: [] }
+  
   constructor(props: Props){
     super(props)
     this.state = {
@@ -31,7 +43,7 @@ export class Listbox extends Component<Props, State> {
       listboxButtonRef: null,
       listboxListRef: null,
       isOpen: false,
-      activeItem: this.props.value,
+      activeItem: null,
       values: [],
       labelId: null,
       buttonId: null,
@@ -88,7 +100,7 @@ export class Listbox extends Component<Props, State> {
     this.setState({ isOpen: true }, () => {
       process.nextTick(() => {
         if (this.state.listboxListRef){
-          this.focus(this.getFocusValue())
+          this.focus(this.getDefaultFocusValue())
           process.nextTick(() => {
             this.state.listboxListRef?.focus()
           })
@@ -97,13 +109,12 @@ export class Listbox extends Component<Props, State> {
     })
   }
 
-  getFocusValue = (): string | null => {
-    const activeValue = this.props.value
+  getDefaultFocusValue = (): string | null => {
     // Set active value to be the first option
     // in the list if no item is selected.
     // https://www.w3.org/TR/wai-aria-practices/#listbox_kbd_interaction
-    if (!activeValue){ return this.state.values[0] }
-    return Array.isArray(activeValue) ? activeValue[0] : activeValue
+    const firstSelectedOption = this.props.multiselect ? this.props.values[0] : this.props.value
+    return firstSelectedOption || this.state.values[0]
   }
 
   close = (): void => {
@@ -111,20 +122,20 @@ export class Listbox extends Component<Props, State> {
   }
 
   select = (value: string): void => {
-    if (!this.props.multiselect) {
+    if (this.props.multiselect) {
+      this.props.onChange([value, ...this.props.values])
+    } else {
       this.props.onChange(value)
       process.nextTick(() => {
         this.close()
       })
-    } else if (this.props.value !== null && Array.isArray(this.props.value)) {
-      this.props.onChange([value, ...this.props.value])
     }
   }
 
   focus = (value: string | null): void => {
     this.setState({ activeItem: value }, () => {
       if (value === null){ return }
-      this.state.listboxListRef?.children[this.state.values.indexOf(this.getFocusValue())].scrollIntoView({ block: "nearest" })
+      this.state.listboxListRef?.children[this.state.values.indexOf(value)].scrollIntoView({ block: "nearest" })
     })
   }
 

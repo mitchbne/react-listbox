@@ -72,7 +72,7 @@ describe("given listbox is determined by isOpen", () => {
 interface Setup {
   onChange: () => void;
   optionValues: string[];
-  value: string[] | string;
+  value: string[];
 }
 
 function setup({ onChange, optionValues, value }: Setup) {  
@@ -81,7 +81,7 @@ function setup({ onChange, optionValues, value }: Setup) {
   )
   
   render(
-    <Listbox multiselect onChange={onChange} value={value}>
+    <Listbox multiselect onChange={onChange} values={value}>
       {({ isOpen }: { isOpen: boolean }) => (
         <>
           <ListboxLabel>Select something</ListboxLabel>

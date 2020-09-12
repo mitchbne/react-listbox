@@ -39,10 +39,19 @@ export class ListboxOption extends Component<Props, State> {
     this.context.setActiveItem(this.props.value)
   }
 
+  isSelected = (): boolean => {
+    if (this.context.props.multiselect) {
+      return this.context.props.values.includes(this.props.value)
+    } else {
+      return this.context.props.value === this.props.value
+    }
+  }
+
   render(): React.ReactNode{
     const { children, className } = this.props
     const isActive = this.context.activeItem === this.props.value
-    const isSelected = this.context.props.value === this.props.value || (Array.isArray(this.context.props.value) && this.context.props.value.includes(this.props.value))
+    const isSelected = this.isSelected()
+    
     return (
       <li
         className={className}
