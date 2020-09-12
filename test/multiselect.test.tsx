@@ -48,9 +48,7 @@ describe("given listbox is determined by isOpen", () => {
     })
 
     it("then displays the listbox", () => {
-      const listbox = screen.getByRole("listbox")
-
-      expect(listbox).toBeInTheDocument()
+      expect(screen.getByRole("listbox")).toBeInTheDocument()
     })
 
     it("then focuses the first selected option", () => {
@@ -64,6 +62,10 @@ describe("given listbox is determined by isOpen", () => {
         userEvent.click(option)
         
         expect(onChange).toHaveBeenCalledWith(["item1", "item2"])
+      })
+
+      it("then does NOT close the list", () => {
+        expect(screen.queryByRole("listbox")).toBeInTheDocument()
       })
     })
   })
