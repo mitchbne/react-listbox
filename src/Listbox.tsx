@@ -9,7 +9,7 @@ interface SharedProps {
 }
 
 interface SingleselectProps extends SharedProps {
-  multiselect: false;
+  multiselect?: false;
   value: string | null,
 }
 
