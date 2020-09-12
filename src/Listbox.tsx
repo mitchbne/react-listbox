@@ -3,19 +3,21 @@ import React, { Component } from "react"
 export const ListboxContext = React.createContext({})
 
 interface SharedProps {
-  children: React.ReactNode,
-  className?: string,
-  onChange: (value: string | string[] | null) => void
+  children: React.ReactNode;
+  className?: string;
+  onChange: (value: string | string[] | null) => void;
 }
 
 interface SingleselectProps extends SharedProps {
   multiselect?: false;
-  value: string | null,
+  value: string | null;
+  values: never;
 }
 
 interface MultiselectProps extends SharedProps {
   multiselect: true;
   values: string[];
+  value: never;
 }
 
 type Props = SingleselectProps | MultiselectProps
