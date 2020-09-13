@@ -68,6 +68,19 @@ describe("given listbox is determined by isOpen", () => {
         expect(screen.queryByRole("listbox")).toBeInTheDocument()
       })
     })
+
+    describe("when clicking on an already selected option", () => {
+      it("then calls onChange with that value removed", () => {
+        const item0 = screen.getByText("Item 2 (selected) (active)")
+        userEvent.click(item0)
+        
+        expect(onChange).toHaveBeenCalledWith([])
+      })
+
+      it("then does NOT close the list", () => {
+        expect(screen.queryByRole("listbox")).toBeInTheDocument()
+      })
+    })
   })
 })
 
