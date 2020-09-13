@@ -1,6 +1,6 @@
 import * as React from "react"
 import userEvent from "@testing-library/user-event"
-import { render, screen } from "@testing-library/react"
+import { fireEvent, render, screen } from "@testing-library/react"
 import {
   Listbox,
   ListboxButton,
@@ -66,6 +66,22 @@ describe("given listbox is determined by isOpen", () => {
 
       it("then does NOT close the list", () => {
         expect(screen.queryByRole("listbox")).toBeInTheDocument()
+      })
+    })
+
+    describe("when shift", () => {
+      describe.each(["Down", "ArrowDown"])("and %i", (key) => {
+        it("then selects the next value", () => {
+          fireEvent.keyDown(screen.getByRole("listbox"), { key, shiftKey: true })
+          expect(onChange).toHaveBeenCalledWith(["item2", "item3"])
+        })
+      })
+
+      describe.each(["Up", "ArrowUp"])("and %i", (key) => {
+        it("then selects the next value", () => {
+          fireEvent.keyDown(screen.getByRole("listbox"), { key, shiftKey: true })
+          expect(onChange).toHaveBeenCalledWith(["item1", "item2"])
+        })
       })
     })
   })

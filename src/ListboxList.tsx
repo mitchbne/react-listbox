@@ -37,7 +37,6 @@ export class ListboxList extends Component<Props, State> {
     const focusedIndex = this.state.values?.indexOf(this.context.activeItem)
     // focusedIndex is -1 if this.context.activeItem  is not in this.state.values
     if (focusedIndex === -1 || !this.state.values){ return }
-
     let indexToFocus
     switch (e.key) {
     case "Esc":
@@ -63,6 +62,10 @@ export class ListboxList extends Component<Props, State> {
       if (focusedIndex || focusedIndex === 0){ // Typescript makes us check this.
         indexToFocus = focusedIndex - 1 < 0 ? this.state.values?.length - 1 : focusedIndex - 1
         this.context.focus(this.state.values[indexToFocus])
+
+        if (this.context.props.multiselect && e.shiftKey) {
+          this.context.select(this.state.values[indexToFocus])
+        }
       }
       break
     case "Down":
@@ -71,6 +74,10 @@ export class ListboxList extends Component<Props, State> {
       if (focusedIndex || focusedIndex === 0){ // Typescript makes us check this.
         indexToFocus = focusedIndex + 1 > this.state.values?.length - 1 ? 0 : focusedIndex + 1
         this.context.focus(this.state.values[indexToFocus])
+
+        if (this.context.props.multiselect && e.shiftKey) {
+          this.context.select(this.state.values[indexToFocus])
+        }
       }
       break
     case "Spacebar":
