@@ -30,7 +30,9 @@ export class ListboxList extends Component<Props, State> {
 
   handleBlur = (e: React.FocusEvent): void => {
     if (e.relatedTarget === this.context.listboxButtonRef){ return } // The button will already handle the toggle for us
-    this.context.close()
+    if (!this.context.props.multiselect) {
+      this.context.close()
+    }
   }
 
   handleKeydown = (e: React.KeyboardEvent): void => {
@@ -85,8 +87,14 @@ export class ListboxList extends Component<Props, State> {
       e.preventDefault()
       if (this.context.typeahead !== "") {
         this.context.type(" ")
-      } else {
+      } else if (!e.shiftKey) {
         this.context.select(this.context.activeItem || this.context.props)
+      } else {
+        const lastIndex = this.context.values.indexOf(this.context.lastSelected)
+        const activeIndex = this.context.values.indexOf(this.context.activeItem)
+
+        const toSelect = lastIndex > activeIndex ? this.context.values.slice(activeIndex, lastIndex) : this.context.values.slice(lastIndex + 1, activeIndex + 1)
+        this.context.selectMany(toSelect)
       }
       break
     case "Enter":

@@ -32,6 +32,7 @@ type State = {
   buttonId: string | null,
   optionIds: Array<[string, string]>,
   optionRefs: Array<[string, HTMLElement]>,
+  lastSelected: string | null;
 }
 
 export class Listbox extends Component<Props, State> {
@@ -50,6 +51,7 @@ export class Listbox extends Component<Props, State> {
       buttonId: null,
       optionIds: [],
       optionRefs: [],
+      lastSelected: null,
     }
   }
 
@@ -131,6 +133,14 @@ export class Listbox extends Component<Props, State> {
         this.close()
       })
     }
+
+    this.setState({ lastSelected: value })
+  }
+
+  selectMany = (values: string[]): void => {
+    if (this.props.multiselect) {
+      this.props.onChange(this.sortByValues([...values, ...this.props.values]))
+    }
   }
   
   sortByValues(values: string[]): string[] {
@@ -174,6 +184,7 @@ export class Listbox extends Component<Props, State> {
       open: this.open,
       close: this.close,
       select: this.select,
+      selectMany: this.selectMany,
       focus: this.focus,
       clearTypeahead: this.clearTypeahead,
       typeahead: this.state.typeahead,
@@ -182,6 +193,7 @@ export class Listbox extends Component<Props, State> {
       setListboxButtonRef: this.setListboxButtonRef,
       listboxButtonRef: this.state.listboxButtonRef,
       listboxListRef: this.state.listboxListRef,
+      lastSelected: this.state.lastSelected,
       isOpen: this.state.isOpen,
       activeItem: this.state.activeItem,
       setActiveItem: this.setActiveItem,

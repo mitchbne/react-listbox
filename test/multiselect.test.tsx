@@ -16,7 +16,7 @@ describe("given listbox is determined by isOpen", () => {
   })
   
   const onChange = jest.fn()
-  const optionValues = ["item0", "item1", "item2", "item3"]
+  const optionValues = ["item0", "item1", "item2", "item3", "item4"]
   const value = ["item2"]
   
   describe("by default", () => {
@@ -57,10 +57,12 @@ describe("given listbox is determined by isOpen", () => {
     })
 
     describe("when clicking on an option", () => {
-      it("then calls onChange with values ordered based on options", () => {
+      beforeEach(() => {
         const item0 = screen.getByText("Item 0")
         userEvent.click(item0)
-        
+      })
+      
+      it("then calls onChange with values ordered based on options", () => {
         expect(onChange).toHaveBeenCalledWith(["item0", "item2"])
       })
 
@@ -69,7 +71,7 @@ describe("given listbox is determined by isOpen", () => {
       })
     })
 
-    describe("when shift", () => {
+    describe("when pressing shift", () => {
       describe.each(["Down", "ArrowDown"])("and %i", (key) => {
         it("then selects the next value", () => {
           fireEvent.keyDown(screen.getByRole("listbox"), { key, shiftKey: true })
@@ -81,6 +83,32 @@ describe("given listbox is determined by isOpen", () => {
         it("then selects the next value", () => {
           fireEvent.keyDown(screen.getByRole("listbox"), { key, shiftKey: true })
           expect(onChange).toHaveBeenCalledWith(["item1", "item2"])
+        })
+      })
+
+      describe.each(["Spacebar"])("and %i", (key) => {
+        describe("When moving up", () => {
+          const keyArrow = "ArrowUp"
+          
+          it("then selects contiguous items from the most recently selected item to the focused item ", () => {
+            userEvent.click(screen.getByText("Item 4"))
+            fireEvent.keyDown(screen.getByRole("listbox"), { key: keyArrow })
+            fireEvent.keyDown(screen.getByRole("listbox"), { key: keyArrow })
+            fireEvent.keyDown(screen.getByRole("listbox"), { key: keyArrow })
+            fireEvent.keyDown(screen.getByRole("listbox"), { key, shiftKey: true })
+            expect(onChange).toHaveBeenCalledWith(["item1", "item2", "item3"])
+          })
+        })
+
+        describe("When moving down", () => {
+          const keyArrow = "ArrowDown"
+          it("then selects contiguous items from the most recently selected item to the focused item ", () => {
+            userEvent.click(screen.getByText("Item 2 (selected) (active)"))
+            fireEvent.keyDown(screen.getByRole("listbox"), { key: keyArrow })
+            fireEvent.keyDown(screen.getByRole("listbox"), { key: keyArrow })
+            fireEvent.keyDown(screen.getByRole("listbox"), { key, shiftKey: true })
+            expect(onChange).toHaveBeenCalledWith(["item2", "item3", "item4"])
+          })
         })
       })
     })
@@ -109,6 +137,7 @@ function setup({ onChange, optionValues, value }: Setup) {
             <ListboxOption value={optionValues[1]}>{innerOption("Item 1")}</ListboxOption>
             <ListboxOption value={optionValues[2]}>{innerOption("Item 2")}</ListboxOption>
             <ListboxOption value={optionValues[3]}>{innerOption("Item 3")}</ListboxOption>
+            <ListboxOption value={optionValues[4]}>{innerOption("Item 4")}</ListboxOption>
           </ListboxList>}
         </>
       )}
