@@ -124,13 +124,26 @@ export class Listbox extends Component<Props, State> {
 
   select = (value: string): void => {
     if (this.props.multiselect) {
-      this.props.onChange([value, ...this.props.values])
+      this.props.onChange(this.sortByValues([value, ...this.props.values]))
     } else {
       this.props.onChange(value)
       process.nextTick(() => {
         this.close()
       })
     }
+  }
+  
+  sortByValues(values: string[]): string[] {
+    const indexOf = (value: string) => this.state.values.indexOf(value)
+    return values.sort((a, b) => {
+      if (indexOf(a) > indexOf(b)) {
+        return 1
+      } else if (indexOf(a) < indexOf(b)) {
+        return -1
+      }
+      
+      return 0
+    })
   }
 
   focus = (value: string | null): void => {

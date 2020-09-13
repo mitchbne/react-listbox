@@ -16,7 +16,7 @@ describe("given listbox is determined by isOpen", () => {
   })
   
   const onChange = jest.fn()
-  const optionValues = ["item1", "item2", "item3"]
+  const optionValues = ["item0", "item1", "item2", "item3"]
   const value = ["item2"]
   
   describe("by default", () => {
@@ -57,11 +57,11 @@ describe("given listbox is determined by isOpen", () => {
     })
 
     describe("when clicking on an option", () => {
-      it("then calls onChange", () => {
-        const [option] = screen.getAllByRole("option")
-        userEvent.click(option)
+      it("then calls onChange with values ordered based on options", () => {
+        const item0 = screen.getByText("Item 0")
+        userEvent.click(item0)
         
-        expect(onChange).toHaveBeenCalledWith(["item1", "item2"])
+        expect(onChange).toHaveBeenCalledWith(["item0", "item2"])
       })
 
       it("then does NOT close the list", () => {
@@ -89,9 +89,10 @@ function setup({ onChange, optionValues, value }: Setup) {
           <ListboxLabel>Select something</ListboxLabel>
           <ListboxButton>{({ isFocused }) => <>{isFocused ? "Click me (focused)" : "Click me"}</>}</ListboxButton>
           {isOpen && <ListboxList>
-            <ListboxOption value={optionValues[0]}>{innerOption("Item 1")}</ListboxOption>
-            <ListboxOption value={optionValues[1]}>{innerOption("Item 2")}</ListboxOption>
-            <ListboxOption value={optionValues[2]}>{innerOption("Item 3")}</ListboxOption>
+            <ListboxOption value={optionValues[0]}>{innerOption("Item 0")}</ListboxOption>
+            <ListboxOption value={optionValues[1]}>{innerOption("Item 1")}</ListboxOption>
+            <ListboxOption value={optionValues[2]}>{innerOption("Item 2")}</ListboxOption>
+            <ListboxOption value={optionValues[3]}>{innerOption("Item 3")}</ListboxOption>
           </ListboxList>}
         </>
       )}
