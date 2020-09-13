@@ -126,7 +126,7 @@ export class Listbox extends Component<Props, State> {
 
   select = (value: string): void => {
     if (this.props.multiselect) {
-      this.props.onChange(this.sortByValues([value, ...this.props.values]))
+      this.props.onChange(this.sortByValues(this.toggleValue(value)))
     } else {
       this.props.onChange(value)
       process.nextTick(() => {
@@ -139,7 +139,9 @@ export class Listbox extends Component<Props, State> {
 
   selectMany = (values: string[]): void => {
     if (this.props.multiselect) {
-      this.props.onChange(this.sortByValues([...values, ...this.props.values]))
+      const newValues = [...values, ...this.props.values]
+      const dedupedNewValues = newValues.filter((value, index) => index === newValues.indexOf(value) )
+      this.props.onChange(this.sortByValues(dedupedNewValues))
     }
   }
   
@@ -154,6 +156,15 @@ export class Listbox extends Component<Props, State> {
       
       return 0
     })
+  }
+
+  toggleValue(value: string): string[] {
+    if (this.props.multiselect) {
+      const values = this.props.values
+      return values.includes(value) ? values.filter(v => v !== value) : [value, ...values]
+    }
+
+    return []
   }
 
   focus = (value: string | null): void => {

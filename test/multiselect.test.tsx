@@ -71,6 +71,19 @@ describe("given listbox is determined by isOpen", () => {
       })
     })
 
+    describe("when clicking on an already selected option", () => {
+      it("then calls onChange with that value removed", () => {
+        const item0 = screen.getByText("Item 2 (selected) (active)")
+        userEvent.click(item0)
+        
+        expect(onChange).toHaveBeenCalledWith([])
+      })
+
+      it("then does NOT close the list", () => {
+        expect(screen.queryByRole("listbox")).toBeInTheDocument()
+      })
+    })
+
     describe("when pressing shift", () => {
       describe.each(["Down", "ArrowDown"])("and %i", (key) => {
         it("then selects the next value", () => {
@@ -90,7 +103,7 @@ describe("given listbox is determined by isOpen", () => {
         describe("When moving up", () => {
           const keyArrow = "ArrowUp"
           
-          it("then selects contiguous items from the most recently selected item to the focused item ", () => {
+          it("then selects contiguous items from the most recently selected item to the focused item", () => {
             userEvent.click(screen.getByText("Item 4"))
             fireEvent.keyDown(screen.getByRole("listbox"), { key: keyArrow })
             fireEvent.keyDown(screen.getByRole("listbox"), { key: keyArrow })
@@ -102,7 +115,7 @@ describe("given listbox is determined by isOpen", () => {
 
         describe("When moving down", () => {
           const keyArrow = "ArrowDown"
-          it("then selects contiguous items from the most recently selected item to the focused item ", () => {
+          it("then selects contiguous items from the most recently selected item to the focused item", () => {
             userEvent.click(screen.getByText("Item 2 (selected) (active)"))
             fireEvent.keyDown(screen.getByRole("listbox"), { key: keyArrow })
             fireEvent.keyDown(screen.getByRole("listbox"), { key: keyArrow })
