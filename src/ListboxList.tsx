@@ -87,14 +87,14 @@ export class ListboxList extends Component<Props, State> {
       e.preventDefault()
       if (this.context.typeahead !== "") {
         this.context.type(" ")
-      } else if (!e.shiftKey) {
-        this.context.select(this.context.activeItem || this.context.props)
-      } else {
+      } else if (e.shiftKey && this.context.props.multiselect) {
         const lastIndex = this.context.values.indexOf(this.context.lastSelected)
         const activeIndex = this.context.values.indexOf(this.context.activeItem)
 
         const toSelect = lastIndex > activeIndex ? this.context.values.slice(activeIndex, lastIndex) : this.context.values.slice(lastIndex + 1, activeIndex + 1)
         this.context.selectMany(toSelect)
+      } else {
+        this.context.select(this.context.activeItem || this.context.props)
       }
       break
     case "Enter":
