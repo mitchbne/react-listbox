@@ -52,10 +52,18 @@ export class ListboxList extends Component<Props, State> {
       break
     case "End":
       e.preventDefault()
+      if (e.shiftKey && e.ctrlKey) {
+        const activeIndex = this.context.values.indexOf(this.context.activeItem)
+        this.context.selectMany(this.context.values.slice(activeIndex, this.context.values.length))
+      }
       this.context.focus(this.state.values[this.state.values.length - 1])
       break
     case "Home":
       e.preventDefault()
+      if (e.shiftKey && e.ctrlKey) {
+        const activeIndex = this.context.values.indexOf(this.context.activeItem)
+        this.context.selectMany(this.context.values.slice(0, activeIndex))
+      }
       this.context.focus(this.state.values[0])
       break
     case "Up":

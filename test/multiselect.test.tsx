@@ -14,6 +14,10 @@ describe("given listbox is determined by isOpen", () => {
     jest.useFakeTimers()
     Element.prototype.scrollIntoView = jest.fn()
   })
+
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
   
   const onChange = jest.fn()
   const optionValues = ["item0", "item1", "item2", "item3", "item4"]
@@ -120,6 +124,21 @@ describe("given listbox is determined by isOpen", () => {
             fireEvent.keyDown(screen.getByRole("listbox"), { key: keyArrow })
             fireEvent.keyDown(screen.getByRole("listbox"), { key: keyArrow })
             fireEvent.keyDown(screen.getByRole("listbox"), { key, shiftKey: true })
+            expect(onChange).toHaveBeenCalledWith(["item2", "item3", "item4"])
+          })
+        })
+      })
+
+      describe("and Ctrl", () => {
+        describe("and Home", () => {
+          it("then selects all items from focused item to the first", () => {
+            fireEvent.keyDown(screen.getByRole("listbox"), { key: "Home", shiftKey: true, ctrlKey: true })
+            expect(onChange).toHaveBeenCalledWith(["item0", "item1", "item2"])
+          })
+        })
+        describe("and End", () => {
+          it("then selects all items from focused item to the first", () => {
+            fireEvent.keyDown(screen.getByRole("listbox"), { key: "End", shiftKey: true, ctrlKey: true })
             expect(onChange).toHaveBeenCalledWith(["item2", "item3", "item4"])
           })
         })
