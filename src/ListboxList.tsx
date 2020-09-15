@@ -52,7 +52,7 @@ export class ListboxList extends Component<Props, State> {
       break
     case "End":
       e.preventDefault()
-      if (e.shiftKey && e.ctrlKey) {
+      if (e.shiftKey && e.ctrlKey && this.context.props.multiselect) {
         const activeIndex = this.context.values.indexOf(this.context.activeItem)
         this.context.selectMany(this.context.values.slice(activeIndex, this.context.values.length))
       }
@@ -60,7 +60,7 @@ export class ListboxList extends Component<Props, State> {
       break
     case "Home":
       e.preventDefault()
-      if (e.shiftKey && e.ctrlKey) {
+      if (e.shiftKey && e.ctrlKey && this.context.props.multiselect) {
         const activeIndex = this.context.values.indexOf(this.context.activeItem)
         this.context.selectMany(this.context.values.slice(0, activeIndex))
       }
@@ -108,6 +108,15 @@ export class ListboxList extends Component<Props, State> {
     case "Enter":
       e.preventDefault()
       this.context.select(this.context.activeItem || this.context.props)
+      break
+    case "a":
+      if (!this.context.props.multiselect) { return }
+      e.preventDefault()
+      if (this.context.values.every((value: string) => this.context.props.values.includes(value))) {
+        this.context.props.onChange([])
+      } else {
+        this.context.selectMany(this.context.values)
+      }
       break
     default:
       if (!(isString(e.key) && e.key.length === 1)) {
