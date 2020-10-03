@@ -1,3 +1,9 @@
+
+<h4 align="center">
+ This repository is no longer actively maintained. Please checkout the <a href="https://github.com/tailwindlabs/headlessui/tree/develop/packages/%40headlessui-react">official HeadlessUI listbox component</a> designed by TailwindLabs.
+</h4>
+---
+
 <h2 align="center">
   React Listbox
 </h2>
