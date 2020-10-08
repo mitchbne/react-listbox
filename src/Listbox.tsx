@@ -2,12 +2,24 @@ import React, { Component } from "react"
 
 export const ListboxContext = React.createContext({})
 
-type Props = {
-  children: React.ReactNode,
-  className?: string,
-  value: string | null,
-  onChange: (value: string | null) => void
+interface SharedProps {
+  children: React.ReactNode;
+  className?: string;
 }
+
+interface SingleselectProps extends SharedProps {
+  multiselect?: false;
+  value: string | null;
+  onChange: (value: string | null) => void;
+}
+
+interface MultiselectProps extends SharedProps {
+  multiselect: true;
+  values: string[];
+  onChange: (value: string[]) => void;
+}
+
+type Props = SingleselectProps | MultiselectProps
 
 type State = {
   typeahead: string,
@@ -20,9 +32,12 @@ type State = {
   buttonId: string | null,
   optionIds: Array<[string, string]>,
   optionRefs: Array<[string, HTMLElement]>,
+  lastSelected: string | null;
 }
 
 export class Listbox extends Component<Props, State> {
+  static defaultProps = { values: [] }
+  
   constructor(props: Props){
     super(props)
     this.state = {
@@ -30,12 +45,13 @@ export class Listbox extends Component<Props, State> {
       listboxButtonRef: null,
       listboxListRef: null,
       isOpen: false,
-      activeItem: this.props.value,
+      activeItem: null,
       values: [],
       labelId: null,
       buttonId: null,
       optionIds: [],
       optionRefs: [],
+      lastSelected: null,
     }
   }
 
@@ -87,12 +103,7 @@ export class Listbox extends Component<Props, State> {
     this.setState({ isOpen: true }, () => {
       process.nextTick(() => {
         if (this.state.listboxListRef){
-          let activeValue = this.props.value
-          // Set active value to be the first option
-          // in the list if no item is selected.
-          // https://www.w3.org/TR/wai-aria-practices/#listbox_kbd_interaction
-          if (!activeValue){ activeValue = this.state.values[0] }
-          this.focus(activeValue)
+          this.focus(this.getDefaultFocusValue())
           process.nextTick(() => {
             this.state.listboxListRef?.focus()
           })
@@ -101,21 +112,65 @@ export class Listbox extends Component<Props, State> {
     })
   }
 
+  getDefaultFocusValue = (): string | null => {
+    // Set active value to be the first option
+    // in the list if no item is selected.
+    // https://www.w3.org/TR/wai-aria-practices/#listbox_kbd_interaction
+    const firstSelectedOption = this.props.multiselect ? this.props.values[0] : this.props.value
+    return firstSelectedOption || this.state.values[0]
+  }
+
   close = (): void => {
     this.setState({ isOpen: false }, () => { this.state.listboxButtonRef?.focus() })
   }
 
   select = (value: string): void => {
-    this.props.onChange(value)
-    process.nextTick(() => {
-      this.close()
+    if (this.props.multiselect) {
+      this.props.onChange(this.sortByValues(this.toggleValue(value)))
+    } else {
+      this.props.onChange(value)
+      process.nextTick(() => {
+        this.close()
+      })
+    }
+
+    this.setState({ lastSelected: value })
+  }
+
+  selectMany = (values: string[]): void => {
+    if (this.props.multiselect) {
+      const newValues = [...values, ...this.props.values]
+      const dedupedNewValues = newValues.filter((value, index) => index === newValues.indexOf(value) )
+      this.props.onChange(this.sortByValues(dedupedNewValues))
+    }
+  }
+  
+  sortByValues(values: string[]): string[] {
+    const indexOf = (value: string) => this.state.values.indexOf(value)
+    return values.sort((a, b) => {
+      if (indexOf(a) > indexOf(b)) {
+        return 1
+      } else if (indexOf(a) < indexOf(b)) {
+        return -1
+      }
+      
+      return 0
     })
+  }
+
+  toggleValue(value: string): string[] {
+    if (this.props.multiselect) {
+      const values = this.props.values
+      return values.includes(value) ? values.filter(v => v !== value) : [value, ...values]
+    }
+
+    return []
   }
 
   focus = (value: string | null): void => {
     this.setState({ activeItem: value }, () => {
       if (value === null){ return }
-      this.state.listboxListRef?.children[this.state.values.indexOf(this.state.activeItem)].scrollIntoView({ block: "nearest" })
+      this.state.listboxListRef?.children[this.state.values.indexOf(value)].scrollIntoView({ block: "nearest" })
     })
   }
 
@@ -140,6 +195,7 @@ export class Listbox extends Component<Props, State> {
       open: this.open,
       close: this.close,
       select: this.select,
+      selectMany: this.selectMany,
       focus: this.focus,
       clearTypeahead: this.clearTypeahead,
       typeahead: this.state.typeahead,
@@ -148,6 +204,7 @@ export class Listbox extends Component<Props, State> {
       setListboxButtonRef: this.setListboxButtonRef,
       listboxButtonRef: this.state.listboxButtonRef,
       listboxListRef: this.state.listboxListRef,
+      lastSelected: this.state.lastSelected,
       isOpen: this.state.isOpen,
       activeItem: this.state.activeItem,
       setActiveItem: this.setActiveItem,
