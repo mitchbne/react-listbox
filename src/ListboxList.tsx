@@ -30,14 +30,15 @@ export class ListboxList extends Component<Props, State> {
 
   handleBlur = (e: React.FocusEvent): void => {
     if (e.relatedTarget === this.context.listboxButtonRef){ return } // The button will already handle the toggle for us
-    this.context.close()
+    if (!this.context.props.multiselect) {
+      this.context.close()
+    }
   }
 
   handleKeydown = (e: React.KeyboardEvent): void => {
     const focusedIndex = this.state.values?.indexOf(this.context.activeItem)
     // focusedIndex is -1 if this.context.activeItem  is not in this.state.values
     if (focusedIndex === -1 || !this.state.values){ return }
-
     let indexToFocus
     switch (e.key) {
     case "Esc":
@@ -51,10 +52,18 @@ export class ListboxList extends Component<Props, State> {
       break
     case "End":
       e.preventDefault()
+      if (e.shiftKey && e.ctrlKey && this.context.props.multiselect) {
+        const activeIndex = this.context.values.indexOf(this.context.activeItem)
+        this.context.selectMany(this.context.values.slice(activeIndex, this.context.values.length))
+      }
       this.context.focus(this.state.values[this.state.values.length - 1])
       break
     case "Home":
       e.preventDefault()
+      if (e.shiftKey && e.ctrlKey && this.context.props.multiselect) {
+        const activeIndex = this.context.values.indexOf(this.context.activeItem)
+        this.context.selectMany(this.context.values.slice(0, activeIndex))
+      }
       this.context.focus(this.state.values[0])
       break
     case "Up":
@@ -63,6 +72,10 @@ export class ListboxList extends Component<Props, State> {
       if (focusedIndex || focusedIndex === 0){ // Typescript makes us check this.
         indexToFocus = focusedIndex - 1 < 0 ? this.state.values?.length - 1 : focusedIndex - 1
         this.context.focus(this.state.values[indexToFocus])
+
+        if (this.context.props.multiselect && e.shiftKey) {
+          this.context.select(this.state.values[indexToFocus])
+        }
       }
       break
     case "Down":
@@ -71,6 +84,10 @@ export class ListboxList extends Component<Props, State> {
       if (focusedIndex || focusedIndex === 0){ // Typescript makes us check this.
         indexToFocus = focusedIndex + 1 > this.state.values?.length - 1 ? 0 : focusedIndex + 1
         this.context.focus(this.state.values[indexToFocus])
+
+        if (this.context.props.multiselect && e.shiftKey) {
+          this.context.select(this.state.values[indexToFocus])
+        }
       }
       break
     case "Spacebar":
@@ -78,6 +95,12 @@ export class ListboxList extends Component<Props, State> {
       e.preventDefault()
       if (this.context.typeahead !== "") {
         this.context.type(" ")
+      } else if (e.shiftKey && this.context.props.multiselect) {
+        const lastIndex = this.context.values.indexOf(this.context.lastSelected)
+        const activeIndex = this.context.values.indexOf(this.context.activeItem)
+
+        const toSelect = lastIndex > activeIndex ? this.context.values.slice(activeIndex, lastIndex) : this.context.values.slice(lastIndex + 1, activeIndex + 1)
+        this.context.selectMany(toSelect)
       } else {
         this.context.select(this.context.activeItem || this.context.props)
       }
@@ -85,6 +108,15 @@ export class ListboxList extends Component<Props, State> {
     case "Enter":
       e.preventDefault()
       this.context.select(this.context.activeItem || this.context.props)
+      break
+    case "a":
+      if (!this.context.props.multiselect) { return }
+      e.preventDefault()
+      if (this.context.values.every((value: string) => this.context.props.values.includes(value))) {
+        this.context.props.onChange([])
+      } else {
+        this.context.selectMany(this.context.values)
+      }
       break
     default:
       if (!(isString(e.key) && e.key.length === 1)) {

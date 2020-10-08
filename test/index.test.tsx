@@ -10,6 +10,11 @@ import {
 } from "../src"
 
 describe("given listbox is determined by isOpen", () => {
+  beforeEach(() => {
+    jest.useFakeTimers()
+    Element.prototype.scrollIntoView = jest.fn()
+  })
+  
   const onChange = jest.fn()
   const optionValues = ["item1", "item2", "item3"]
   const value = "item2"
@@ -41,17 +46,23 @@ describe("given listbox is determined by isOpen", () => {
     })
 
     it("then displays the listbox", () => {
-      const listbox = screen.getByRole("listbox")
-
-      expect(listbox).toBeInTheDocument()
+      expect(screen.getByRole("listbox")).toBeInTheDocument()
     })
 
     describe("when clicking on an option", () => {
-      it("then calls onChange", () => {
+      beforeEach(() => {
         const [option] = screen.getAllByRole("option")
         userEvent.click(option)
-        
+        // Flush out async focus code
+        jest.runAllTimers()
+      })
+
+      it("then calls onChange", () => {
         expect(onChange).toHaveBeenCalledWith(optionValues[0])
+      })
+
+      it("then closes the list", () => {
+        expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
       })
     })
   })
