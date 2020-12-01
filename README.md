@@ -41,14 +41,14 @@ yarn add @mitchbne/react-listbox
 - [x] Home (key) moves the focus and activeItem to the first option.
 - [x] End (key) moves the focus and activeItem to the last option.
 - [x] Selects/focus the first selected option when opened (`if activeItem == null`)
-- [ ] Create a multi-select solution.
-  - [ ] Multi selects focus the first selected option when opened
-  - [ ] Shift + Down Arrow: Moves focus to and toggles the selected state of the next option.
-  - [ ] Shift + Up Arrow: Moves focus to and toggles the selected state of the previous option.
-  - [ ] Shift + Space: Selects contiguous items from the most recently selected item to the focused item.
-  - [ ] Control + Shift + Home: Selects the focused option and all options up to the first option. Optionally, moves focus to the first option.
-  - [ ] Control + Shift + End: Selects the focused option and all options down to the last option. Optionally, moves focus to the last option.
-  - [ ] Control + A: Selects all options in the list. Optionally, if all options are selected, it may also unselect all options.
+- [x] Create a multi-select solution.
+  - [x] Multi selects focus the first selected option when opened
+  - [x] Shift + Down Arrow: Moves focus to and toggles the selected state of the next option.
+  - [x] Shift + Up Arrow: Moves focus to and toggles the selected state of the previous option.
+  - [x] Shift + Space: Selects contiguous items from the most recently selected item to the focused item.
+  - [x] Control + Shift + Home: Selects the focused option and all options up to the first option. Optionally, moves focus to the first option.
+  - [x] Control + Shift + End: Selects the focused option and all options down to the last option. Optionally, moves focus to the last option.
+  - [x] Control + A: Selects all options in the list. Optionally, if all options are selected, it may also unselect all options.
 - [ ] Add support for the ListboxList component to be a React Portal.
 - [ ] Handle disabled ListboxOption
 - [ ] Create an input-filter solution.
