@@ -91,21 +91,61 @@ export const SingleSelect = (): React.ReactElement => {
 export const SingleSelectAvatar = (): React.ReactElement => {
   const [selectedPersonId, setSelectedPersonId] = React.useState<string | null>(null)
   const people = [
-    { id: "5bbb4afc-d23d-4f33-b84a-251f0aafe8d4", name: "Mr. Louisa Durgan", avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/jagan123/128.jpg" },
-    { id: "807e05d8-0896-42e0-9f9f-12c493be0da5", name: "Maudie Collier II", avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/ruehldesign/128.jpg" },
-    { id: "2f8807fd-f9ec-4b52-ad01-51f9d714e3d2", name: "Torrance Kuvalis", avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/homka/128.jpg" },
-    { id: "7b90f1de-cd62-4cef-84ea-9900dc42ff94", name: "Ansley Ferry", avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/bassamology/128.jpg" },
-    { id: "387416e6-dcd0-4acc-a33b-1a3045bbd00c", name: "Tyree Ortiz", avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/tom_even/128.jpg" },
-    { id: "8a8b98b5-52d7-4480-9983-1f09f9e0bd5b", name: "Maxwell Predovic II", avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/evandrix/128.jpg" },
-    { id: "e800caed-40e5-47b1-be64-da445f78c395", name: "Frederik Bernhard", avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/antonyzotov/128.jpg" },
-    { id: "35a46ffa-0622-44a9-b3dc-52554ca37be6", name: "Mr. Aaliyah Parisian", avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/Karimmove/128.jpg" },
-    { id: "0607c49a-140e-42c8-96c0-cb92347b1da7", name: "Fidel Keebler", avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/michzen/128.jpg" },
-    { id: "7a929850-dfb3-4746-bdcb-3d708c63df99", name: "Rosalind Monahan", avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/motionthinks/128.jpg" },
-    { id: "dbea32bc-27da-4651-a7e9-9d0bc2616406", name: "Serenity Lemke", avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/cdavis565/128.jpg" },
-    { id: "e9ed9aae-e6a5-4496-8c54-c9ec7aef7561", name: "Jazmyn Roberts", avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/pmeissner/128.jpg" },
-    { id: "276bf817-ada7-4f81-8b2e-6ae879b7031f", name: "Kailee Stoltenberg", avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/tobysaxon/128.jpg" },
-    { id: "ecf05d1f-892c-423e-9e58-e5e220a1d04a", name: "Heber Carter", avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/caseycavanagh/128.jpg" },
-    { id: "9ed04a2e-1e4d-4acf-9732-e5cd1683728f", name: "Boris Sauer III", avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/ganserene/128.jpg" },
+    {
+      "id": "5bbb4afc-d23d-4f33-b84a-251f0aafe8d4",
+      "name": "Mr. Louisa Durgan",
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+    },
+    {
+      "id": "807e05d8-0896-42e0-9f9f-12c493be0da5",
+      "name": "Maudie Collier II",
+      "avatar": "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+    },
+    {
+      "id": "2f8807fd-f9ec-4b52-ad01-51f9d714e3d2",
+      "name": "Torrance Kuvalis",
+      "avatar": "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+    },
+    {
+      "id": "7b90f1de-cd62-4cef-84ea-9900dc42ff94",
+      "name": "Ansley Ferry",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
+    },
+    {
+      "id": "387416e6-dcd0-4acc-a33b-1a3045bbd00c",
+      "name": "Tyree Ortiz",
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+    },
+    {
+      "id": "8a8b98b5-52d7-4480-9983-1f09f9e0bd5b",
+      "name": "Maxwell Predovic II",
+      "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+    },
+    {
+      "id": "e800caed-40e5-47b1-be64-da445f78c395",
+      "name": "Frederik Bernhard",
+      "avatar": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+    },
+    {
+      "id": "35a46ffa-0622-44a9-b3dc-52554ca37be6",
+      "name": "Mr. Aaliyah Parisian",
+      "avatar": "https://images.unsplash.com/photo-1568409938619-12e139227838?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+    },
+    {
+      "id": "0607c49a-140e-42c8-96c0-cb92347b1da7",
+      "name": "Fidel Keebler",
+      "avatar": "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+    },
+    {
+      "id": "7a929850-dfb3-4746-bdcb-3d708c63df99",
+      "name": "Rosalind Monahan",
+      "avatar": "https://images.unsplash.com/photo-1584486520270-19eca1efcce5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+    },
+    {
+      "id": "dbea32bc-27da-4651-a7e9-9d0bc2616406",
+      "name": "Serenity Lemke",
+      "avatar": "https://images.unsplash.com/photo-1561505457-3bcad021f8ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+    }
   ]
   const selectedPerson = people.find(person => selectedPersonId === person.id)
 
