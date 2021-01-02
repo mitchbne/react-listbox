@@ -101,14 +101,14 @@ export class Listbox extends Component<Props, State> {
 
   open = (): void => {
     this.setState({ isOpen: true }, () => {
-      process.nextTick(() => {
+      window.setTimeout(() => {
         if (this.state.listboxListRef){
           this.focus(this.getDefaultFocusValue())
-          process.nextTick(() => {
+          window.setTimeout(() => {
             this.state.listboxListRef?.focus()
-          })
+          }, 0)
         }
-      })
+      }, 0)
     })
   }
 
